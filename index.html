@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <title>Stefan Ecliserescu · Arta Spectacolului cu Foc & Flow</title>
+  <meta name="description" content="Stefan Ecliserescu Performance Arts, jonglerie profesională cu foc și spectacole flow. Show-uri de foc cinematice pentru festivaluri, nunți, evenimente corporate, cluburi și petreceri private. Rezervă un spectacol.">
+  <meta name="keywords" content="performer foc, jonglerie cu foc, flow arts, spectacol foc, performance LED, entertainment evenimente, Stefan Ecliserescu">
+  <meta property="og:title" content="Stefan Ecliserescu · Arta Spectacolului cu Foc & Flow">
+  <meta property="og:description" content="Te joci cu focul, profesionist. Spectacole de foc și flow cinematice pentru evenimente de neuitat.">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#0b0908">
+  <link rel="icon" type="image/svg+xml" href="logo.svg">
+  <link rel="apple-touch-icon" href="logo.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Hanken+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Lenis: premium momentum smooth-scroll (the "keep gliding after you lift off" feel) -->
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js" defer></script>
+  <style>
+    *{box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
+    /* Lenis takes over wheel scrolling - it manages scroll-behavior via the lenis-smooth class */
+    html.lenis,html.lenis body{height:auto;}
+    .lenis.lenis-smooth{scroll-behavior:auto!important;}
+    .lenis.lenis-smooth [data-lenis-prevent]{overscroll-behavior:contain;}
+    .lenis.lenis-stopped{overflow:hidden;}
+    .lenis.lenis-smooth iframe{pointer-events:none;}
+    body{margin:0;background:#0b0908;color:#f3ede2;font-family:'Hanken Grotesk',system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+    ::selection{background:#ff5a1f;color:#0b0908;}
+    a{color:inherit;text-decoration:none;}
+    input,select,textarea,button{font-family:inherit;}
+    body.reveal-ready [data-reveal]{opacity:0;transform:translateY(30px);}
+    body.reveal-ready [data-reveal].in{opacity:1;transform:none;}
+    [data-reveal]{transition:opacity .9s cubic-bezier(.22,.7,.2,1),transform .9s cubic-bezier(.22,.7,.2,1);}
+    body.nav-solid #site-nav{background:rgba(11,9,8,.82)!important;backdrop-filter:blur(18px) saturate(1.2)!important;-webkit-backdrop-filter:blur(18px) saturate(1.2)!important;box-shadow:0 10px 40px rgba(0,0,0,.45)!important;border-bottom:1px solid rgba(255,140,70,.14)!important;}
+    @keyframes emberRise{0%{transform:translateY(0) translateX(0);opacity:0;}12%{opacity:.9;}90%{opacity:.5;}100%{transform:translateY(-120vh) translateX(var(--dx,20px));opacity:0;}}
+    @keyframes glowPulse{0%,100%{opacity:.55;transform:scale(1);}50%{opacity:.85;transform:scale(1.08);}}
+    @keyframes scrollBob{0%,100%{transform:translateY(0);opacity:.5;}50%{transform:translateY(8px);opacity:1;}}
+    @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto!important;}[data-reveal]{opacity:1!important;transform:none!important;transition:none!important;}}
+    .g-tile{display:grid;place-items:center;background:repeating-linear-gradient(135deg,#1a1410,#1a1410 14px,#211913 14px,#211913 28px);transition:transform .6s cubic-bezier(.2,.7,.2,1);}
+    .ar-4x5{aspect-ratio:4/5;}
+    .ar-9x16{aspect-ratio:9/16;}
+    .ar-1x1{aspect-ratio:1/1;}
+    .ar-16x9{aspect-ratio:16/9;}
+    /* two stacked hero video layers crossfaded for a seamless loop (no restart stall) */
+    .hero-layer{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;opacity:0;transition:opacity .6s linear;will-change:opacity;}
+    /* hero video frame: gentle fade to black - sides + lower part */
+    .hero-fade{position:absolute;inset:0;pointer-events:none;
+      background:
+        linear-gradient(90deg,#0b0908,rgba(11,9,8,0) 9%,rgba(11,9,8,0) 91%,#0b0908),
+        linear-gradient(0deg,#0b0908 0%,rgba(11,9,8,0) 22%),
+        linear-gradient(180deg,rgba(11,9,8,.18) 0%,rgba(11,9,8,0) 18%);}
+    @media (max-width:860px){
+      /* no side fade on mobile - only the lower + top fades */
+      .hero-fade{background:
+        linear-gradient(0deg,#0b0908 0%,rgba(11,9,8,0) 22%),
+        linear-gradient(180deg,rgba(11,9,8,.18) 0%,rgba(11,9,8,0) 18%);}
+    }
+    /* contact form two-up row: stacks (date under event type) on phones */
+    .c-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+    @media (max-width:600px){.c-grid-2{grid-template-columns:1fr;}}
+    /* ---- custom datepicker, styled in the app's fire palette ---- */
+    .dp-wrap{position:relative;}
+    .dp-field{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;padding:13px 15px;border-radius:11px;background:rgba(11,9,8,.6);border:1px solid rgba(255,140,70,.18);color:#f3ede2;font-size:15px;cursor:pointer;text-align:left;transition:border-color .25s,box-shadow .25s;}
+    .dp-field:hover{border-color:rgba(255,140,70,.4);}
+    .dp-field:focus-visible{outline:none;border-color:#ff5a1f;}
+    .dp-field.is-open{border-color:#ff5a1f;box-shadow:0 0 0 3px rgba(255,90,31,.16);}
+    .dp-val.dp-ph{color:#8a8076;}
+    .dp-ico{flex:none;color:#ff8a4b;}
+    .dp-pop{position:absolute;z-index:40;top:calc(100% + 10px);left:0;width:min(330px,calc(100vw - 56px));padding:16px;border-radius:18px;background:linear-gradient(160deg,#241a14,#15100c);border:1px solid rgba(255,140,70,.22);box-shadow:0 24px 60px rgba(0,0,0,.55);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);animation:dpIn .22s cubic-bezier(.2,.7,.2,1);}
+    @keyframes dpIn{from{opacity:0;transform:translateY(-6px) scale(.98);}to{opacity:1;transform:none;}}
+    .dp-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
+    .dp-title{font-family:'Syne',sans-serif;font-weight:600;font-size:16px;color:#f3ede2;text-transform:capitalize;}
+    .dp-nav{display:grid;place-items:center;width:32px;height:32px;border-radius:9px;background:rgba(255,140,70,.08);border:1px solid rgba(255,140,70,.18);color:#f3ede2;font-size:18px;line-height:1;cursor:pointer;transition:background .2s,border-color .2s;}
+    .dp-nav:hover{background:rgba(255,90,31,.22);border-color:rgba(255,140,70,.5);}
+    .dp-week{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-bottom:6px;}
+    .dp-week span{text-align:center;font-size:11px;font-weight:600;letter-spacing:.04em;color:#8a8076;text-transform:uppercase;padding:4px 0;}
+    .dp-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;}
+    .dp-cell-empty{aspect-ratio:1/1;}
+    .dp-day{aspect-ratio:1/1;display:grid;place-items:center;border:0;border-radius:9px;background:transparent;color:#e3dacd;font-size:14px;font-weight:500;cursor:pointer;transition:background .18s,color .18s,transform .12s;}
+    .dp-day:hover{background:rgba(255,140,70,.16);}
+    .dp-day:active{transform:scale(.92);}
+    .dp-day.dp-today{box-shadow:inset 0 0 0 1px rgba(255,140,70,.55);}
+    .dp-day.dp-sel{background:linear-gradient(135deg,#ffce5a,#ff5a1f);color:#0b0908;font-weight:700;box-shadow:0 6px 18px rgba(255,90,31,.4);}
+    .dp-day.dp-sel:hover{background:linear-gradient(135deg,#ffce5a,#ff5a1f);}
+    .dp-day.dp-muted{color:#5b524a;cursor:default;}
+    .dp-day.dp-muted:hover{background:transparent;}
+    .dp-foot{display:flex;gap:8px;margin-top:14px;padding-top:12px;border-top:1px solid rgba(255,140,70,.12);}
+    .dp-foot-btn{flex:1;padding:9px;border-radius:9px;background:rgba(255,140,70,.08);border:1px solid rgba(255,140,70,.18);color:#cfc6ba;font-size:13px;font-weight:600;cursor:pointer;transition:background .2s,color .2s;}
+    .dp-foot-btn:hover{background:rgba(255,90,31,.2);color:#fff;}
+  </style>
+</helmet>
+
+<!-- ============ NAV ============ -->
+<nav id="site-nav" style="position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:clamp(14px,2vw,20px) clamp(20px,5vw,48px);background:transparent;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);transition:background .4s ease,box-shadow .4s ease,border-color .4s ease;border-bottom:1px solid rgba(255,140,70,0);">
+  <a href="#hero" aria-label="Stefan Ecliserescu acasă" style="display:flex;align-items:center;gap:12px;flex:none;">
+    <span aria-hidden="true" style="display:grid;place-items:center;width:38px;height:38px;border-radius:10px;background:linear-gradient(140deg,#ff7a2f,#7e1604);box-shadow:0 0 22px rgba(255,90,31,.5);"><svg width="22" height="22" viewBox="0 0 64 64" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" fill="#0b0908" d="M34.7 11c0 8 8 13.3 13.3 22.7C50.7 39.3 52 43.3 52 47c0 11.7-9.6 18-20 18s-20-6.3-20-18c0-10.7 8-20 12-29.3 1.3 5.3 5.3 8 6.7 13.3 1.9-9.3-1.3-17.3 4-20Zm-2.7 49.3c6.7 0 12-5.1 12-11.9 0-3.8-1.6-6.4-4.1-9.7-.5 3.7-3.2 5.9-5.6 5.9 2.4-4.8-.5-10.1-1.3-12.3-2.7 4-6.9 8-6.9 16.1 0 6.8 4.5 11.9 5.9 11.9Z"/></svg></span>
+    <span style="font-family:'Syne',sans-serif;font-weight:600;letter-spacing:.16em;font-size:13px;text-transform:uppercase;color:#f3ede2;">Stefan&nbsp;Ecliserescu</span>
+  </a>
+
+  <sc-if value="{{ notMobile }}" hint-placeholder-val="{{ true }}">
+    <div style="display:flex;align-items:center;gap:clamp(18px,2.4vw,38px);">
+      <sc-for list="{{ navLinks }}" as="link" hint-placeholder-count="5">
+        <a href="{{ link.href }}" style="font-size:14px;font-weight:500;letter-spacing:.02em;color:#cfc6ba;padding:6px 0;border-bottom:1px solid transparent;transition:color .25s,border-color .25s;" style-hover="color:#ffffff;border-bottom:1px solid #ff5a1f;">{{ link.label }}</a>
+      </sc-for>
+      <!-- language selector -->
+      <div role="group" aria-label="{{ t.langLabel }}" style="display:flex;align-items:center;border:1px solid rgba(255,140,70,.25);border-radius:100px;padding:3px;gap:2px;">
+        <button onClick="{{ setRo }}" aria-pressed="{{ isRo }}" style="{{ roBtnStyle }}">RO</button>
+        <button onClick="{{ setEn }}" aria-pressed="{{ isEn }}" style="{{ enBtnStyle }}">EN</button>
+      </div>
+      <a href="#contact" style="display:inline-flex;align-items:center;gap:8px;padding:11px 22px;border-radius:100px;font-size:14px;font-weight:600;color:#0b0908;background:linear-gradient(135deg,#ffce5a,#ff5a1f);box-shadow:0 6px 24px rgba(255,90,31,.34);transition:transform .25s,box-shadow .25s;" style-hover="transform:translateY(-2px);box-shadow:0 10px 30px rgba(255,90,31,.5);">{{ t.book }}</a>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+    <button onClick="{{ toggleMenu }}" aria-label="{{ t.openMenu }}" aria-expanded="{{ menuOpen }}" style="flex:none;display:grid;gap:5px;background:transparent;border:0;padding:8px;cursor:pointer;">
+      <span aria-hidden="true" style="display:block;width:26px;height:2px;border-radius:2px;background:#f3ede2;"></span>
+      <span aria-hidden="true" style="display:block;width:26px;height:2px;border-radius:2px;background:#f3ede2;"></span>
+      <span aria-hidden="true" style="display:block;width:18px;height:2px;border-radius:2px;background:#ff5a1f;"></span>
+    </button>
+  </sc-if>
+</nav>
+
+<!-- ============ SCROLL PROGRESS - a fuse burning down ============ -->
+<div id="scroll-fuse" aria-hidden="true" style="position:fixed;top:0;left:0;height:2px;width:0;z-index:130;background:linear-gradient(90deg,#ff5a1f 0%,#ffce5a 100%);box-shadow:0 0 10px rgba(255,90,31,.85),0 0 4px #ffce5a;border-radius:0 2px 2px 0;will-change:width;pointer-events:none;"></div>
+
+<!-- ============ MOBILE MENU OVERLAY ============ -->
+<sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+  <div style="position:fixed;inset:0;z-index:120;background:rgba(9,7,6,.96);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);display:flex;flex-direction:column;padding:24px clamp(20px,6vw,48px);">
+    <div style="display:flex;align-items:center;justify-content:space-between;">
+      <span style="font-family:'Syne',sans-serif;font-weight:600;letter-spacing:.16em;font-size:13px;text-transform:uppercase;">{{ t.menu }}</span>
+      <button onClick="{{ closeMenu }}" aria-label="{{ t.closeMenu }}" style="background:transparent;border:0;color:#f3ede2;font-size:30px;line-height:1;cursor:pointer;padding:4px 8px;">&times;</button>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:6px;margin-top:48px;">
+      <sc-for list="{{ navLinks }}" as="link" hint-placeholder-count="5">
+        <a href="{{ link.href }}" onClick="{{ closeMenu }}" style="font-family:'Syne',sans-serif;font-size:34px;font-weight:600;padding:14px 0;border-bottom:1px solid rgba(255,140,70,.12);color:#f3ede2;">{{ link.label }}</a>
+      </sc-for>
+    </div>
+    <!-- language selector -->
+    <div style="margin-top:36px;">
+      <span style="display:block;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:#7d736a;margin-bottom:12px;">{{ t.langLabel }}</span>
+      <div role="group" aria-label="{{ t.langLabel }}" style="display:inline-flex;align-items:center;border:1px solid rgba(255,140,70,.25);border-radius:100px;padding:4px;gap:4px;">
+        <button onClick="{{ setRo }}" aria-pressed="{{ isRo }}" style="{{ roBtnStyleM }}">Română</button>
+        <button onClick="{{ setEn }}" aria-pressed="{{ isEn }}" style="{{ enBtnStyleM }}">English</button>
+      </div>
+    </div>
+    <a href="#contact" onClick="{{ closeMenu }}" style="margin-top:auto;text-align:center;padding:18px;border-radius:100px;font-weight:600;color:#0b0908;background:linear-gradient(135deg,#ffce5a,#ff5a1f);">{{ t.book }}</a>
+  </div>
+</sc-if>
+
+<!-- ============ HERO (overlay around existing fire video) ============ -->
+<section id="hero" style="position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-start;overflow:hidden;">
+  <!-- existing autoplaying muted looping fire video -->
+  <div id="hero-media" aria-hidden="true" style="position:absolute;inset:0;z-index:0;display:flex;align-items:center;justify-content:center;background:#0b0908;overflow:hidden;">
+    <!-- cap the video near its native width (1764px) so big screens don't upscale & pixelate -->
+    <div style="position:relative;width:100%;height:100%;max-width:1640px;overflow:hidden;">
+      <!-- single native-looping video: clip is a ping-pong (start≈end frame) so loop is seamless -->
+      <div id="hero-video" style="position:absolute;inset:0;will-change:transform;">
+        <video class="hero-layer" autoplay muted loop playsinline preload="auto" style="opacity:1;">
+          <source src="loop_pingpong.webm" type="video/webm">
+          <source src="loop_pingpong.mp4" type="video/mp4">
+        </video>
+      </div>
+      <!-- dark frame: gentle fade to black on the sides and lower part -->
+      <div class="hero-fade"></div>
+    </div>
+  </div>
+  <div id="hero-content" style="position:relative;z-index:3;max-width:1100px;width:100%;margin:0 auto;padding:clamp(96px,16vh,170px) clamp(20px,5vw,48px) 0;text-align:center;">
+    <h1 style="margin:0;font-family:'Syne',sans-serif;font-weight:700;line-height:1;letter-spacing:-.01em;font-size:clamp(30px,6.2vw,78px);text-wrap:balance;text-shadow:0 2px 44px rgba(0,0,0,.7),0 0 80px rgba(0,0,0,.4);">{{ t.tagline }}</h1>
+  </div>
+
+  <!-- scroll indicator -->
+  <a href="#about" aria-label="{{ t.scrollAria }}" style="position:absolute;left:50%;bottom:26px;transform:translateX(-50%);z-index:3;display:flex;flex-direction:column;align-items:center;gap:8px;color:#b9b0a4;">
+    <span style="font-size:10px;letter-spacing:.34em;text-transform:uppercase;">{{ t.scroll }}</span>
+    <span aria-hidden="true" style="display:block;width:1px;height:40px;background:linear-gradient(180deg,#ff5a1f,transparent);animation:scrollBob 2s ease-in-out infinite;"></span>
+  </a>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section id="about" style="position:relative;padding:clamp(90px,13vw,170px) clamp(20px,5vw,48px);">
+  <div aria-hidden="true" style="position:absolute;top:6%;left:-120px;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(255,90,31,.16),transparent 70%);filter:blur(40px);animation:glowPulse 9s ease-in-out infinite;pointer-events:none;"></div>
+  <div style="position:relative;max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:clamp(40px,6vw,90px);align-items:center;">
+    <div data-reveal>
+      <span style="font-size:12px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:#ff5a1f;">{{ t.about.kicker }}</span>
+      <h2 style="margin:18px 0 0;font-family:'Syne',sans-serif;font-weight:600;line-height:1.02;letter-spacing:-.02em;font-size:clamp(32px,5.5vw,64px);text-wrap:balance;">{{ t.about.h2 }}</h2>
+      <p style="margin:28px 0 0;font-size:clamp(16px,1.7vw,19px);line-height:1.65;color:#bdb4a8;max-width:54ch;">{{ t.about.p1 }}</p>
+      <p style="margin:18px 0 0;font-size:clamp(16px,1.7vw,19px);line-height:1.65;color:#bdb4a8;max-width:54ch;">{{ t.about.p2 }}</p>
+    </div>
+    <div data-reveal style="border-radius:18px;overflow:hidden;border:1px solid rgba(255,140,70,.12);box-shadow:0 30px 70px rgba(0,0,0,.45);">
+      <img src="gallery/2.jpg" alt="{{ t.about.imgAlt }}" loading="lazy" style="width:100%;height:100%;aspect-ratio:4/5;object-fit:cover;display:block;">
+    </div>
+  </div>
+</section>
+
+<!-- ============ ACTS / SERVICES ============ -->
+<section id="acts" style="position:relative;padding:clamp(90px,13vw,170px) clamp(20px,5vw,48px);">
+  <div style="max-width:1200px;margin:0 auto;">
+    <div data-reveal style="max-width:680px;">
+      <span style="font-size:12px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:#ff5a1f;">{{ t.acts.kicker }}</span>
+      <h2 style="margin:18px 0 0;font-family:'Syne',sans-serif;font-weight:600;line-height:1.02;letter-spacing:-.02em;font-size:clamp(32px,5.5vw,64px);">{{ t.acts.h2 }}</h2>
+    </div>
+    <div style="margin-top:clamp(40px,5vw,64px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:20px;">
+      <sc-for list="{{ acts }}" as="act" hint-placeholder-count="4">
+        <article data-reveal style="position:relative;padding:34px 28px;border-radius:20px;background:linear-gradient(160deg,rgba(32,24,19,.7),rgba(18,14,11,.5));border:1px solid rgba(255,140,70,.13);backdrop-filter:blur(8px);overflow:hidden;transition:transform .35s cubic-bezier(.2,.7,.2,1),border-color .35s,box-shadow .35s;" style-hover="transform:translateY(-6px);border-color:rgba(255,140,70,.4);box-shadow:0 20px 50px rgba(0,0,0,.4);">
+          <span aria-hidden="true" style="position:absolute;top:-30px;right:-10px;font-family:'Syne',sans-serif;font-weight:700;font-size:96px;line-height:1;color:rgba(255,90,31,.12);">{{ act.no }}</span>
+          <span aria-hidden="true" style="display:block;width:44px;height:44px;border-radius:12px;background:linear-gradient(140deg,rgba(255,206,90,.22),rgba(255,90,31,.22));border:1px solid rgba(255,140,70,.3);box-shadow:0 0 22px rgba(255,90,31,.25);"></span>
+          <h3 style="margin:22px 0 0;font-family:'Syne',sans-serif;font-weight:600;font-size:23px;">{{ act.title }}</h3>
+          <p style="margin:12px 0 0;font-size:15px;line-height:1.6;color:#b1a89d;">{{ act.desc }}</p>
+        </article>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GALLERY (masonry, hover zoom) ============ -->
+<section id="gallery" style="position:relative;padding:clamp(90px,13vw,170px) clamp(20px,5vw,48px);background:linear-gradient(180deg,transparent,rgba(20,15,11,.5),transparent);">
+  <div style="max-width:1280px;margin:0 auto;">
+    <div data-reveal style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:clamp(34px,4vw,52px);">
+      <div style="max-width:680px;">
+        <span style="font-size:12px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:#ff5a1f;">{{ t.gallery.kicker }}</span>
+        <h2 style="margin:18px 0 0;font-family:'Syne',sans-serif;font-weight:600;line-height:1.02;letter-spacing:-.02em;font-size:clamp(32px,5.5vw,64px);">{{ t.gallery.h2 }}</h2>
+      </div>
+      <a href="https://www.instagram.com/seperformancearts/" target="_blank" rel="noopener" style="font-size:14px;font-weight:600;color:#ffce5a;border-bottom:1px solid rgba(255,206,90,.4);padding-bottom:3px;">{{ t.gallery.more }}</a>
+    </div>
+    <!-- masonry via CSS columns; swap placeholders for real photos/clips -->
+    <div data-reveal style="columns:260px;column-gap:18px;">
+      <sc-for list="{{ gallery }}" as="g" hint-placeholder-count="8">
+        <figure style="break-inside:avoid;margin:0 0 18px;border-radius:16px;overflow:hidden;border:1px solid rgba(255,140,70,.12);position:relative;">
+          <img src="{{ g.src }}" alt="{{ g.label }}" loading="lazy" class="g-tile {{ g.cls }}" style="width:100%;height:100%;object-fit:cover;display:block;" style-hover="transform:scale(1.08);">
+          <sc-if value="{{ g.video }}" hint-placeholder-val="{{ false }}">
+            <span aria-hidden="true" style="position:absolute;top:12px;left:12px;display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:rgba(11,9,8,.65);border:1px solid rgba(255,255,255,.25);color:#fff;font-size:12px;backdrop-filter:blur(4px);">&#9658;</span>
+          </sc-if>
+        </figure>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EVENTS / BOOKING OCCASIONS ============ -->
+<section id="events" style="position:relative;padding:clamp(90px,13vw,170px) clamp(20px,5vw,48px);overflow:hidden;">
+  <div aria-hidden="true" style="position:absolute;bottom:-10%;right:-140px;width:480px;height:480px;border-radius:50%;background:radial-gradient(circle,rgba(255,147,51,.16),transparent 70%);filter:blur(50px);animation:glowPulse 11s ease-in-out infinite;pointer-events:none;"></div>
+  <div style="position:relative;max-width:1200px;margin:0 auto;">
+    <div data-reveal style="max-width:680px;">
+      <span style="font-size:12px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:#ff5a1f;">{{ t.events.kicker }}</span>
+      <h2 style="margin:18px 0 0;font-family:'Syne',sans-serif;font-weight:600;line-height:1.02;letter-spacing:-.02em;font-size:clamp(32px,5.5vw,64px);">{{ t.events.h2 }}</h2>
+    </div>
+    <div style="margin-top:clamp(40px,5vw,64px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:16px;">
+      <sc-for list="{{ occasions }}" as="o" hint-placeholder-count="6">
+        <div data-reveal style="padding:26px 24px;border-radius:18px;background:linear-gradient(160deg,rgba(32,24,19,.6),rgba(18,14,11,.4));border:1px solid rgba(255,140,70,.13);transition:border-color .3s,background .3s;" style-hover="border-color:rgba(255,140,70,.4);background:linear-gradient(160deg,rgba(40,29,22,.75),rgba(22,16,12,.5));">
+          <h3 style="margin:0;font-family:'Syne',sans-serif;font-weight:600;font-size:20px;">{{ o.title }}</h3>
+          <p style="margin:8px 0 0;font-size:14px;line-height:1.55;color:#a99f93;">{{ o.desc }}</p>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TESTIMONIALS ============ -->
+<section id="testimonials" style="position:relative;padding:clamp(90px,13vw,170px) clamp(20px,5vw,48px);">
+  <div style="max-width:1200px;margin:0 auto;">
+    <div data-reveal style="text-align:center;max-width:640px;margin:0 auto;">
+      <span style="font-size:12px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:#ff5a1f;">{{ t.testimonials.kicker }}</span>
+      <h2 style="margin:18px 0 0;font-family:'Syne',sans-serif;font-weight:600;line-height:1.02;letter-spacing:-.02em;font-size:clamp(32px,5.5vw,64px);">{{ t.testimonials.h2 }}</h2>
+    </div>
+    <div style="margin-top:clamp(40px,5vw,64px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:20px;">
+      <sc-for list="{{ testimonials }}" as="t" hint-placeholder-count="3">
+        <figure data-reveal style="margin:0;padding:34px 30px;border-radius:20px;background:linear-gradient(160deg,rgba(32,24,19,.55),rgba(18,14,11,.4));border:1px solid rgba(255,140,70,.13);backdrop-filter:blur(8px);">
+          <span aria-hidden="true" style="font-family:'Syne',sans-serif;font-size:54px;line-height:.4;color:rgba(255,90,31,.5);">&ldquo;</span>
+          <blockquote style="margin:18px 0 0;font-size:18px;line-height:1.55;color:#e3dacd;">{{ t.quote }}</blockquote>
+          <figcaption style="margin-top:24px;display:flex;align-items:center;gap:12px;">
+            <span aria-hidden="true" style="width:38px;height:38px;border-radius:50%;background:linear-gradient(140deg,#ff7a2f,#7e1604);flex:none;"></span>
+            <span><span style="display:block;font-weight:600;font-size:14px;">{{ t.name }}</span><span style="display:block;font-size:13px;color:#a99f93;">{{ t.role }}</span></span>
+          </figcaption>
+        </figure>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT / BOOKING ============ -->
+<section id="contact" style="position:relative;padding:clamp(90px,13vw,170px) clamp(20px,5vw,48px);overflow:hidden;">
+  <div aria-hidden="true" style="position:absolute;top:-60px;left:50%;transform:translateX(-50%);width:600px;height:300px;background:radial-gradient(60% 100% at 50% 0,rgba(255,90,31,.2),transparent 70%);filter:blur(40px);pointer-events:none;"></div>
+  <div style="position:relative;max-width:980px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:clamp(36px,5vw,64px);align-items:start;">
+    <div data-reveal>
+      <span style="font-size:12px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:#ff5a1f;">{{ t.contact.kicker }}</span>
+      <h2 style="margin:18px 0 0;font-family:'Syne',sans-serif;font-weight:600;line-height:1.02;letter-spacing:-.02em;font-size:clamp(32px,5.5vw,56px);">{{ t.contact.h2 }}</h2>
+      <p style="margin:22px 0 0;font-size:16px;line-height:1.65;color:#b1a89d;max-width:42ch;">{{ t.contact.lead }}</p>
+      <div style="margin-top:32px;display:flex;flex-direction:column;gap:14px;">
+        <a href="https://www.instagram.com/seperformancearts/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:12px;font-size:15px;color:#e3dacd;" style-hover="color:#ffce5a;">
+          <span aria-hidden="true" style="display:grid;place-items:center;width:38px;height:38px;border-radius:11px;background:rgba(255,90,31,.12);border:1px solid rgba(255,140,70,.3);">&#9685;</span>
+          @seperformancearts
+        </a>
+        <a href="mailto:contact@seperformancearts.com" style="display:inline-flex;align-items:center;gap:12px;font-size:15px;color:#e3dacd;" style-hover="color:#ffce5a;">
+          <span aria-hidden="true" style="display:grid;place-items:center;width:38px;height:38px;border-radius:11px;background:rgba(255,90,31,.12);border:1px solid rgba(255,140,70,.3);">@</span>
+          contact@seperformancearts.com
+        </a>
+      </div>
+    </div>
+
+    <div data-reveal style="padding:clamp(26px,3vw,38px);border-radius:24px;background:linear-gradient(160deg,rgba(32,24,19,.7),rgba(16,12,10,.55));border:1px solid rgba(255,140,70,.16);backdrop-filter:blur(10px);box-shadow:0 30px 80px rgba(0,0,0,.4);">
+      <sc-if value="{{ notSubmitted }}" hint-placeholder-val="{{ true }}">
+        <form onSubmit="{{ onSubmit }}" style="display:flex;flex-direction:column;gap:16px;">
+          <label style="display:flex;flex-direction:column;gap:7px;font-size:13px;font-weight:500;color:#b1a89d;">{{ t.contact.name }}
+            <input type="text" name="name" required placeholder="{{ t.contact.namePh }}" style="padding:13px 15px;border-radius:11px;background:rgba(11,9,8,.6);border:1px solid rgba(255,140,70,.18);color:#f3ede2;font-size:15px;outline:none;transition:border-color .25s;" style-focus="border-color:#ff5a1f;">
+          </label>
+          <label style="display:flex;flex-direction:column;gap:7px;font-size:13px;font-weight:500;color:#b1a89d;">{{ t.contact.email }}
+            <input type="email" name="email" required placeholder="{{ t.contact.emailPh }}" style="padding:13px 15px;border-radius:11px;background:rgba(11,9,8,.6);border:1px solid rgba(255,140,70,.18);color:#f3ede2;font-size:15px;outline:none;transition:border-color .25s;" style-focus="border-color:#ff5a1f;">
+          </label>
+          <div class="c-grid-2">
+            <label style="display:flex;flex-direction:column;gap:7px;font-size:13px;font-weight:500;color:#b1a89d;">{{ t.contact.eventType }}
+              <select name="eventType" required style="padding:13px 15px;border-radius:11px;background:rgba(11,9,8,.6);border:1px solid rgba(255,140,70,.18);color:#f3ede2;font-size:15px;outline:none;" style-focus="border-color:#ff5a1f;">
+                <option value="" style="background:#15110d;">{{ t.contact.select }}</option>
+                <sc-for list="{{ eventTypes }}" as="et" hint-placeholder-count="6">
+                  <option value="{{ et }}" style="background:#15110d;">{{ et }}</option>
+                </sc-for>
+              </select>
+            </label>
+            <div style="display:flex;flex-direction:column;gap:7px;font-size:13px;font-weight:500;color:#b1a89d;"><span>{{ t.contact.date }}</span>
+              <div class="dp-wrap">
+                <button type="button" onClick="{{ toggleDate }}" aria-haspopup="dialog" aria-expanded="{{ dateOpen }}" class="dp-field {{ dateOpenCls }}">
+                  <span class="dp-val {{ dateValueCls }}">{{ dateDisplay }}</span>
+                  <svg class="dp-ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4.5" width="18" height="16" rx="2.5"></rect><path d="M3 9h18M8 2.5v4M16 2.5v4"></path></svg>
+                </button>
+                <input type="hidden" name="date" value="{{ selectedDate }}">
+                <sc-if value="{{ dateOpen }}" hint-placeholder-val="{{ false }}">
+                  <div class="dp-pop" role="dialog" aria-label="{{ t.contact.date }}">
+                    <div class="dp-head">
+                      <button type="button" onClick="{{ calPrev }}" class="dp-nav" aria-label="{{ t.contact.prevMonth }}">&lsaquo;</button>
+                      <span class="dp-title">{{ calLabel }}</span>
+                      <button type="button" onClick="{{ calNext }}" class="dp-nav" aria-label="{{ t.contact.nextMonth }}">&rsaquo;</button>
+                    </div>
+                    <div class="dp-week">
+                      <sc-for list="{{ weekdays }}" as="w" hint-placeholder-count="7"><span>{{ w }}</span></sc-for>
+                    </div>
+                    <div class="dp-grid">
+                      <sc-for list="{{ calDays }}" as="cell" hint-placeholder-count="35">
+                        <sc-if value="{{ cell.empty }}" hint-placeholder-val="{{ false }}"><span class="dp-cell-empty"></span></sc-if>
+                        <sc-if value="{{ cell.real }}" hint-placeholder-val="{{ true }}"><button type="button" class="dp-day {{ cell.cls }}" onClick="{{ cell.onClick }}">{{ cell.day }}</button></sc-if>
+                      </sc-for>
+                    </div>
+                    <div class="dp-foot">
+                      <button type="button" onClick="{{ calToday }}" class="dp-foot-btn">{{ t.contact.today }}</button>
+                      <button type="button" onClick="{{ calClear }}" class="dp-foot-btn">{{ t.contact.clear }}</button>
+                    </div>
+                  </div>
+                </sc-if>
+              </div>
+            </div>
+          </div>
+          <label style="display:flex;flex-direction:column;gap:7px;font-size:13px;font-weight:500;color:#b1a89d;">{{ t.contact.message }}
+            <textarea name="message" rows="4" placeholder="{{ t.contact.messagePh }}" style="padding:13px 15px;border-radius:11px;background:rgba(11,9,8,.6);border:1px solid rgba(255,140,70,.18);color:#f3ede2;font-size:15px;outline:none;resize:vertical;transition:border-color .25s;" style-focus="border-color:#ff5a1f;"></textarea>
+          </label>
+          <button type="submit" style="margin-top:6px;padding:16px;border:0;border-radius:100px;font-size:16px;font-weight:600;color:#0b0908;background:linear-gradient(135deg,#ffce5a,#ff5a1f);cursor:pointer;box-shadow:0 10px 30px rgba(255,90,31,.36);transition:transform .25s,box-shadow .25s;" style-hover="transform:translateY(-2px);box-shadow:0 14px 40px rgba(255,90,31,.5);">{{ t.contact.submit }}</button>
+        </form>
+      </sc-if>
+      <sc-if value="{{ submitted }}" hint-placeholder-val="{{ false }}">
+        <div style="text-align:center;padding:40px 10px;">
+          <span aria-hidden="true" style="display:inline-grid;place-items:center;width:64px;height:64px;border-radius:50%;background:linear-gradient(140deg,#ffce5a,#ff5a1f);color:#0b0908;font-size:30px;box-shadow:0 0 36px rgba(255,90,31,.5);">&#10003;</span>
+          <h3 style="margin:24px 0 0;font-family:'Syne',sans-serif;font-weight:600;font-size:24px;">{{ t.contact.successTitle }}</h3>
+          <p style="margin:12px 0 0;color:#b1a89d;font-size:15px;">{{ t.contact.successText }}</p>
+        </div>
+      </sc-if>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer style="position:relative;padding:clamp(60px,8vw,90px) clamp(20px,5vw,48px) 40px;border-top:1px solid rgba(255,140,70,.12);overflow:hidden;">
+  <div aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;opacity:.7;">{{ footerEmbers }}</div>
+  <div style="position:relative;max-width:1200px;margin:0 auto;">
+    <div style="display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;gap:40px;">
+      <div style="max-width:380px;">
+        <div style="display:flex;align-items:center;gap:12px;">
+          <span aria-hidden="true" style="display:grid;place-items:center;width:40px;height:40px;border-radius:11px;background:linear-gradient(140deg,#ff7a2f,#7e1604);box-shadow:0 0 22px rgba(255,90,31,.5);"><svg width="23" height="23" viewBox="0 0 64 64" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" fill="#0b0908" d="M34.7 11c0 8 8 13.3 13.3 22.7C50.7 39.3 52 43.3 52 47c0 11.7-9.6 18-20 18s-20-6.3-20-18c0-10.7 8-20 12-29.3 1.3 5.3 5.3 8 6.7 13.3 1.9-9.3-1.3-17.3 4-20Zm-2.7 49.3c6.7 0 12-5.1 12-11.9 0-3.8-1.6-6.4-4.1-9.7-.5 3.7-3.2 5.9-5.6 5.9 2.4-4.8-.5-10.1-1.3-12.3-2.7 4-6.9 8-6.9 16.1 0 6.8 4.5 11.9 5.9 11.9Z"/></svg></span>
+          <span style="font-family:'Syne',sans-serif;font-weight:600;letter-spacing:.04em;font-size:18px;">Stefan Ecliserescu</span>
+        </div>
+        <p style="margin:18px 0 0;font-size:15px;line-height:1.6;color:#a99f93;">{{ t.footer.desc }}</p>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:48px;">
+        <div>
+          <span style="font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:#7d736a;">{{ t.footer.explore }}</span>
+          <div style="display:flex;flex-direction:column;gap:10px;margin-top:16px;">
+            <sc-for list="{{ navLinks }}" as="link" hint-placeholder-count="5">
+              <a href="{{ link.href }}" style="font-size:15px;color:#cfc6ba;" style-hover="color:#ffce5a;">{{ link.label }}</a>
+            </sc-for>
+          </div>
+        </div>
+        <div>
+          <span style="font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:#7d736a;">{{ t.footer.connect }}</span>
+          <div style="display:flex;flex-direction:column;gap:10px;margin-top:16px;">
+            <a href="https://www.instagram.com/seperformancearts/" target="_blank" rel="noopener" style="font-size:15px;color:#cfc6ba;" style-hover="color:#ffce5a;">Instagram</a>
+            <a href="#contact" style="font-size:15px;color:#cfc6ba;" style-hover="color:#ffce5a;">{{ t.book }}</a>
+            <a href="mailto:contact@seperformancearts.com" style="font-size:15px;color:#cfc6ba;" style-hover="color:#ffce5a;">contact@seperformancearts.com</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:clamp(40px,6vw,64px);padding-top:28px;border-top:1px solid rgba(255,140,70,.1);display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;align-items:center;">
+      <span style="font-size:13px;color:#7d736a;">{{ t.footer.rights }}</span>
+      <span style="font-size:13px;color:#7d736a;">@seperformancearts</span>
+    </div>
+  </div>
+</footer>
+</x-dc>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script type="text/x-dc" data-dc-script data-props="{
+  &quot;$preview&quot;: { &quot;width&quot;: &quot;100%&quot;, &quot;height&quot;: 760 },
+  &quot;ambientEmbers&quot;: {
+    &quot;editor&quot;: &quot;boolean&quot;,
+    &quot;default&quot;: true,
+    &quot;tsType&quot;: &quot;boolean&quot;
+  },
+  &quot;parallaxHero&quot;: {
+    &quot;editor&quot;: &quot;boolean&quot;,
+    &quot;default&quot;: true,
+    &quot;tsType&quot;: &quot;boolean&quot;
+  }
+}">
+class Component extends DCLogic {
+  constructor(props){
+    super(props);
+    this.reduce = typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const _now = (typeof Date !== 'undefined') ? new Date() : null;
+    this.state = {
+      isMobile: typeof window !== 'undefined' ? window.innerWidth < 860 : false,
+      menuOpen: false,
+      submitted: false,
+      lang: 'ro',  // Romanian by default; switchable to 'en' via the language selector
+      // ---- custom datepicker ----
+      dateOpen: false,
+      selectedDate: '',                                 // ISO yyyy-mm-dd, '' when unset
+      calYear: _now ? _now.getFullYear() : 2026,        // month currently shown in the calendar
+      calMonth: _now ? _now.getMonth() : 0
+    };
+
+    // ---- Static gallery media (labels are localized below and merged in renderVals) ----
+    this.galleryMeta = [
+      { cls: 'ar-1x1',  src: 'gallery/1.jpg', video: false },
+      { cls: 'ar-4x5',  src: 'gallery/2.jpg', video: false },
+      { cls: 'ar-16x9', src: 'gallery/3.jpg', video: false },
+      { cls: 'ar-4x5',  src: 'gallery/4.jpg', video: false },
+      { cls: 'ar-4x5',  src: 'gallery/5.jpg', video: false }
+    ];
+
+    // ---- Translations: Romanian (default) + English ----
+    this.content = {
+      ro: {
+        tagline: 'Lumină. Mișcare. Spectacol.',
+        book: 'Rezervă un spectacol',
+        menu: 'Meniu',
+        langLabel: 'Limbă',
+        openMenu: 'Deschide meniul',
+        closeMenu: 'Închide meniul',
+        scroll: 'Derulează',
+        scrollAria: 'Derulează către conținut',
+        nav: { about: 'Despre', acts: 'Numere', gallery: 'Galerie', events: 'Evenimente', contact: 'Contact' },
+        about: {
+          kicker: 'Despre',
+          h2: 'Foc, mișcare și precizie, create pentru scenă.',
+          imgAlt: 'Stefan Ecliserescu performând cu foc pe scenă',
+          p1: 'Stefan Ecliserescu este un artist performer specializat în foc și manipulare de obiecte: jonglerie cu foc și flow arts montate ca un spectacol cinematic, de mare impact. Fiecare număr este coregrafiat pentru a capta întreaga sală, de la evenimente private intime până la scena principală a festivalurilor.',
+          p2: 'Cu ani de experiență pe scenă, Stefan aduce la fiecare eveniment un spectacol sigur, profesionist și spectaculos, disponibil pentru deplasări în țară și în străinătate.'
+        },
+        acts: {
+          kicker: 'Numere & Servicii',
+          h2: 'Spectacole create pentru spațiul tău.',
+          items: [
+            { no: '01', title: 'Jonglerie cu Foc', desc: 'Cluburi, torțe și cuțite în secvențe controlate, de mare viteză: precizie și curaj pur.' },
+            { no: '02', title: 'Spectacol de Foc', desc: 'Un set complet coregrafiat pe muzică. Creat pentru scena principală și momentul de vârf.' },
+            { no: '03', title: 'Spectacol Flow / LED', desc: 'Glow, poi și efecte vizuale LED programabile: un spectacol fără flacără pentru spații interioare.' },
+            { no: '04', title: 'Scenă & Evenimente', desc: 'Numere personalizate adaptate spațiului, conceptului și publicului tău, de la intim la arenă.' }
+          ]
+        },
+        gallery: {
+          kicker: 'Galerie',
+          h2: 'Lumină, surprinsă.',
+          more: 'Vezi mai mult pe Instagram →',
+          labels: [
+            'Spectacol cu baloane uriașe în parc',
+            'Înghițire de foc sub cerul nopții',
+            'Scântei în timpul unui spectacol de foc',
+            'Spectacol de foc în duo pentru publicul de pe stradă',
+            'Număr cu baloane pe catalige, încântând publicul'
+          ]
+        },
+        events: {
+          kicker: 'Evenimente',
+          h2: 'Create pentru momentele care contează.',
+          items: [
+            { title: 'Festivaluri', desc: 'Seturi de foc demne de cap de afiș, pentru mulțimi și scene principale.' },
+            { title: 'Nunți', desc: 'Un moment de neuitat pentru primul dans sau pentru petrecere.' },
+            { title: 'Corporate', desc: 'Lansări de brand, gale și momente spectaculoase pentru conferințe.' },
+            { title: 'Cluburi de Noapte', desc: 'Foc și LED go-go plin de energie pentru ringul de dans.' },
+            { title: 'Petreceri Private', desc: 'Spectacol intim, de aproape, pentru orice ocazie.' },
+            { title: 'Activări de Brand', desc: 'Numere tematice personalizate, gândite să fie filmate și distribuite.' }
+          ]
+        },
+        testimonials: {
+          kicker: 'Testimoniale',
+          h2: 'Sala își amintește.',
+          items: [
+            { quote: 'Un moment de senzație absolut. Toată mulțimea s-a oprit și a privit. Impecabil și de neuitat.', name: 'Andrei P.', role: 'Director de Festival' },
+            { quote: 'Profesionist de la primul email până la ultima reverență. Spectacolul de foc a fost punctul culminant al serii.', name: 'Ioana M.', role: 'Organizator de Evenimente' },
+            { quote: 'Cinema pur. Invitații noștri încă vorbesc despre el și după săptămâni.', name: 'Raluca D.', role: 'Gazdă Privată' }
+          ]
+        },
+        contact: {
+          kicker: 'Rezervări',
+          h2: 'Hai să aprindem noaptea.',
+          lead: 'Spune-mi despre evenimentul tău și îți răspund în 48 de ore cu disponibilitatea și o ofertă personalizată.',
+          emailPlaceholder: 'contact@seperformancearts.com',
+          name: 'Nume', namePh: 'Numele tău',
+          email: 'Email', emailPh: 'tu@email.com',
+          eventType: 'Tip eveniment', select: 'Alege…',
+          date: 'Data', datePh: 'Alege data…', today: 'Astăzi', clear: 'Șterge',
+          prevMonth: 'Luna anterioară', nextMonth: 'Luna următoare',
+          months: ['Ianuarie','Februarie','Martie','Aprilie','Mai','Iunie','Iulie','August','Septembrie','Octombrie','Noiembrie','Decembrie'],
+          weekdays: ['Lu','Ma','Mi','Jo','Vi','Sâ','Du'],
+          message: 'Mesaj', messagePh: 'Spune-mi despre evenimentul tău: locație, public, program…',
+          submit: 'Trimite cererea de rezervare',
+          successTitle: 'Cerere primită.',
+          successText: 'Mulțumesc, te voi contacta în 48 de ore.'
+        },
+        eventTypes: ['Festival', 'Nuntă', 'Eveniment corporate', 'Club de noapte', 'Petrecere privată', 'Activare de brand', 'Altele'],
+        footer: {
+          desc: 'Jonglerie profesională cu foc și spectacole flow. Disponibil oriunde în lume pentru festivaluri, evenimente și rezervări private.',
+          explore: 'Explorează',
+          connect: 'Conectează-te',
+          emailPlaceholder: 'contact@seperformancearts.com',
+          rights: '© 2026 Stefan Ecliserescu Performance Arts. Toate drepturile rezervate.'
+        }
+      },
+      en: {
+        tagline: 'Light. Motion. Spectacle.',
+        book: 'Book a performance',
+        menu: 'Menu',
+        langLabel: 'Language',
+        openMenu: 'Open menu',
+        closeMenu: 'Close menu',
+        scroll: 'Scroll',
+        scrollAria: 'Scroll to content',
+        nav: { about: 'About', acts: 'Acts', gallery: 'Gallery', events: 'Events', contact: 'Contact' },
+        about: {
+          kicker: 'About',
+          h2: 'Fire, motion and precision, built for the stage.',
+          imgAlt: 'Stefan Ecliserescu performing with fire on stage',
+          p1: 'Stefan Ecliserescu is a performance artist specializing in fire and object manipulation: fire juggling and flow arts staged as a cinematic, high-impact spectacle. Each act is choreographed to command the room, from intimate private events to the festival main stage.',
+          p2: 'With years of stage experience, Stefan brings a safe, professional and spectacular performance to every event, available to travel nationally and internationally.'
+        },
+        acts: {
+          kicker: 'Acts & Services',
+          h2: 'Performances built to your room.',
+          items: [
+            { no: '01', title: 'Fire Juggling', desc: 'Clubs, torches and knives in controlled, high-speed sequences: pure precision and nerve.' },
+            { no: '02', title: 'Fire Show', desc: 'A fully choreographed set staged to music. Built for the main stage and the big moment.' },
+            { no: '03', title: 'Flow / LED Show', desc: 'Glow, poi and programmable LED visuals: a flame-free spectacle for indoor venues.' },
+            { no: '04', title: 'Stage & Events', desc: 'Custom routines scaled to your space, brief and audience, from intimate to arena.' }
+          ]
+        },
+        gallery: {
+          kicker: 'Gallery',
+          h2: 'Light, captured.',
+          more: 'See more on Instagram →',
+          labels: [
+            'Giant bubble performance in the park',
+            'Fire eating under the night sky',
+            'Sparks flying during a fire show',
+            'Duo fire performance for a street crowd',
+            'Stilt bubble act delighting the crowd'
+          ]
+        },
+        events: {
+          kicker: 'Events',
+          h2: 'Made for the moments that matter.',
+          items: [
+            { title: 'Festivals', desc: 'Headline-ready fire sets for crowds and main stages.' },
+            { title: 'Weddings', desc: 'A breathtaking first-dance or send-off moment.' },
+            { title: 'Corporate', desc: 'Brand launches, galas and conference showpieces.' },
+            { title: 'Nightclubs', desc: 'High-energy go-go fire and LED for the floor.' },
+            { title: 'Private Parties', desc: 'Intimate, close-up performance for any occasion.' },
+            { title: 'Brand Activations', desc: 'Custom themed acts that get filmed and shared.' }
+          ]
+        },
+        testimonials: {
+          kicker: 'Testimonials',
+          h2: 'The room remembers.',
+          items: [
+            { quote: 'An absolute showstopper. The whole crowd stopped and stared. Flawless and unforgettable.', name: 'Andrei P.', role: 'Festival Director' },
+            { quote: 'Professional from first email to final bow. The fire show was the highlight of our night.', name: 'Ioana M.', role: 'Event Planner' },
+            { quote: 'Pure cinema. Our guests are still talking about it weeks later.', name: 'Raluca D.', role: 'Private Host' }
+          ]
+        },
+        contact: {
+          kicker: 'Booking',
+          h2: "Let's set the night on fire.",
+          lead: "Tell me about your event and I'll get back within 48 hours with availability and a tailored quote.",
+          emailPlaceholder: 'contact@seperformancearts.com',
+          name: 'Name', namePh: 'Your name',
+          email: 'Email', emailPh: 'you@email.com',
+          eventType: 'Event type', select: 'Select…',
+          date: 'Date', datePh: 'Pick a date…', today: 'Today', clear: 'Clear',
+          prevMonth: 'Previous month', nextMonth: 'Next month',
+          months: ['January','February','March','April','May','June','July','August','September','October','November','December'],
+          weekdays: ['Mo','Tu','We','Th','Fr','Sa','Su'],
+          message: 'Message', messagePh: 'Tell me about your event: venue, audience, timing…',
+          submit: 'Send booking request',
+          successTitle: 'Request received.',
+          successText: "Thank you, I'll be in touch within 48 hours."
+        },
+        eventTypes: ['Festival', 'Wedding', 'Corporate event', 'Nightclub', 'Private party', 'Brand activation', 'Other'],
+        footer: {
+          desc: 'Professional fire juggling & flow performance. Available worldwide for festivals, events and private bookings.',
+          explore: 'Explore',
+          connect: 'Connect',
+          emailPlaceholder: 'contact@seperformancearts.com',
+          rights: '© 2026 Stefan Ecliserescu Performance Arts. All rights reserved.'
+        }
+      }
+    };
+
+    this._onScroll = this._onScroll.bind(this);
+    this._onResize = this._onResize.bind(this);
+  }
+
+  componentDidMount(){
+    window.addEventListener('scroll', this._onScroll, { passive: true });
+    window.addEventListener('resize', this._onResize);
+    // close the datepicker on outside click / Escape (added before any reduced-motion early return)
+    this._onDocPointer = (e) => {
+      if (!this.state.dateOpen) return;
+      if (e.target && e.target.closest && e.target.closest('.dp-wrap')) return;
+      this.setState({ dateOpen: false });
+    };
+    this._onDocKey = (e) => { if (e.key === 'Escape' && this.state.dateOpen) this.setState({ dateOpen: false }); };
+    document.addEventListener('mousedown', this._onDocPointer);
+    document.addEventListener('keydown', this._onDocKey);
+    this._onScroll();
+    // Seamless hero loop: a single native-looping video. The clip is a ping-pong
+    // (start frame ≈ end frame) so the wrap-around is imperceptible - no fade.
+    const stage = document.getElementById('hero-video');
+    const video = stage ? stage.querySelector('.hero-layer') : null;
+    if (video) {
+      // React/SSR can drop the muted attribute; set as a property so muted autoplay isn't blocked
+      video.muted = true; video.defaultMuted = true; video.setAttribute('muted', '');
+      video.loop = true;
+      const play = () => { const p = video.play(); if (p && p.catch) p.catch(() => {}); };
+      video.addEventListener('canplay', play, { once: true });
+      video.addEventListener('loadeddata', play, { once: true });
+      play();
+    }
+    if (this.reduce) {
+      // respect reduced-motion for scroll/parallax effects, but leave the ambient hero loop running
+      return;
+    }
+    // ---- Momentum smooth-scroll (Lenis): premium inertial glide on wheel; native momentum stays on touch ----
+    this._initLenis = () => {
+      if (this.lenis || typeof window === 'undefined' || !window.Lenis) return;
+      this.lenis = new window.Lenis({
+        lerp: 0.085,            // lower = longer, silkier glide after you stop scrolling
+        wheelMultiplier: 1,
+        smoothWheel: true,
+        syncTouch: false,       // keep native iOS/Android momentum - it already feels right
+        touchMultiplier: 1.5
+      });
+      const raf = (time) => { if (this.lenis) { this.lenis.raf(time); this._rafId = requestAnimationFrame(raf); } };
+      this._rafId = requestAnimationFrame(raf);
+    };
+    if (window.Lenis) this._initLenis();
+    else window.addEventListener('load', this._initLenis, { once: true });
+    // Smooth, offset-aware anchor navigation routed through Lenis
+    this._onAnchor = (e) => {
+      const a = e.target && e.target.closest ? e.target.closest('a[href^="#"]') : null;
+      if (!a) return;
+      const id = a.getAttribute('href');
+      if (!id || id === '#') return;
+      const el = document.querySelector(id);
+      if (!el) return;
+      e.preventDefault();
+      if (this.lenis) { this.lenis.start(); this.lenis.scrollTo(el, { offset: -72, duration: 1.3 }); }
+      else el.scrollIntoView({ behavior: this.reduce ? 'auto' : 'smooth' });
+    };
+    document.addEventListener('click', this._onAnchor);
+    // scroll-reveal
+    document.body.classList.add('reveal-ready');
+    this._io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); this._io.unobserve(e.target); } });
+    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+    document.querySelectorAll('[data-reveal]').forEach(el => this._io.observe(el));
+    // safety: never leave content hidden
+    this._safety = setTimeout(() => {
+      document.querySelectorAll('[data-reveal]:not(.in)').forEach(el => el.classList.add('in'));
+    }, 3500);
+  }
+
+  componentWillUnmount(){
+    window.removeEventListener('scroll', this._onScroll);
+    window.removeEventListener('resize', this._onResize);
+    if (this._onDocPointer) document.removeEventListener('mousedown', this._onDocPointer);
+    if (this._onDocKey) document.removeEventListener('keydown', this._onDocKey);
+    if (this._initLenis) window.removeEventListener('load', this._initLenis);
+    if (this._onAnchor) document.removeEventListener('click', this._onAnchor);
+    if (this._rafId) cancelAnimationFrame(this._rafId);
+    if (this.lenis) { this.lenis.destroy(); this.lenis = null; }
+    if (this._io) this._io.disconnect();
+    if (this._safety) clearTimeout(this._safety);
+  }
+
+  _onScroll(){
+    const y = window.scrollY || window.pageYOffset;
+    document.body.classList.toggle('nav-solid', y > 40);
+    // burning-fuse progress bar
+    const fuse = document.getElementById('scroll-fuse');
+    if (fuse) {
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      fuse.style.width = (max > 0 ? Math.min(1, y / max) * 100 : 0) + '%';
+    }
+    if (!this.reduce && (this.props.parallaxHero ?? true)) {
+      const c = document.getElementById('hero-content');
+      const v = document.getElementById('hero-video');
+      if (y < window.innerHeight) {
+        if (c) c.style.transform = 'translateY(' + (y * 0.18) + 'px)';
+        if (c) c.style.opacity = String(Math.max(0, 1 - y / (window.innerHeight * 0.75)));
+        if (v) v.style.transform = 'scale(' + (1 + y / window.innerHeight * 0.12) + ')';
+      }
+    }
+  }
+
+  _onResize(){
+    const m = window.innerWidth < 860;
+    if (m !== this.state.isMobile) this.setState({ isMobile: m, menuOpen: m ? this.state.menuOpen : false });
+  }
+
+  _embers(count, key){
+    if (!(this.props.ambientEmbers ?? true) || this.reduce) return null;
+    const spans = [];
+    for (let i = 0; i < count; i++){
+      const left = Math.round((i / count) * 100 + (Math.sin(i * 12.9) * 6)) ;
+      const size = 2 + (i % 4);
+      const dur = 7 + (i % 6) * 1.6;
+      const delay = -(i * 0.9) % dur;
+      const dx = (i % 2 ? 1 : -1) * (20 + (i % 5) * 14);
+      spans.push(React.createElement('span', {
+        key: 'e' + key + i,
+        'aria-hidden': 'true',
+        style: {
+          position: 'absolute',
+          bottom: '-10px',
+          left: left + '%',
+          width: size + 'px',
+          height: size + 'px',
+          borderRadius: '50%',
+          background: i % 3 === 0 ? '#ffce5a' : '#ff5a1f',
+          boxShadow: '0 0 8px ' + (i % 3 === 0 ? '#ffce5a' : '#ff5a1f'),
+          '--dx': dx + 'px',
+          animation: 'emberRise ' + dur + 's linear ' + delay + 's infinite'
+        }
+      }));
+    }
+    return React.createElement(React.Fragment, null, spans);
+  }
+
+  // ---- datepicker helpers ----
+  _iso(d){ return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); }
+
+  // Monday-first month grid: leading blanks, then one cell per day.
+  _buildCalendar(year, month){
+    const offset = (new Date(year, month, 1).getDay() + 6) % 7;   // 0=Mon … 6=Sun
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+    const cells = [];
+    for (let i = 0; i < offset; i++) cells.push({ empty: true });
+    for (let d = 1; d <= daysInMonth; d++){
+      cells.push({ empty: false, day: String(d), iso: this._iso(new Date(year, month, d)) });
+    }
+    return cells;
+  }
+
+  _selectDate(iso){ this.setState({ selectedDate: iso, dateOpen: false }); }
+
+  renderVals(){
+    const lang = this.state.lang === 'en' ? 'en' : 'ro';
+    const t = this.content[lang];
+
+    const navLinks = [
+      { label: t.nav.about,   href: '#about' },
+      { label: t.nav.acts,    href: '#acts' },
+      { label: t.nav.gallery, href: '#gallery' },
+      { label: t.nav.events,  href: '#events' },
+      { label: t.nav.contact, href: '#contact' }
+    ];
+
+    // merge static gallery media with the localized alt-text labels
+    const gallery = this.galleryMeta.map((m, i) => ({ ...m, label: t.gallery.labels[i] }));
+
+    // language-selector button styles (active = warm gradient pill)
+    const segBase = 'border:0;border-radius:100px;font-weight:600;letter-spacing:.04em;cursor:pointer;transition:background .25s,color .25s;';
+    const activeFill = 'background:linear-gradient(135deg,#ffce5a,#ff5a1f);color:#0b0908;';
+    const inactiveFill = 'background:transparent;color:#cfc6ba;';
+    const segSmall = segBase + 'padding:7px 13px;font-size:12px;';
+    const segBig   = segBase + 'padding:11px 22px;font-size:16px;';
+    const isRo = lang === 'ro';
+    const isEn = lang === 'en';
+
+    // ---- datepicker view model ----
+    const now = new Date();
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    const todayIso = this._iso(today);
+    const calYear = this.state.calYear;
+    const calMonth = this.state.calMonth;
+    const sel = this.state.selectedDate;
+    const calLabel = t.contact.months[calMonth] + ' ' + calYear;
+
+    const calDays = this._buildCalendar(calYear, calMonth).map(c => {
+      if (c.empty) return { empty: true, real: false };
+      const isPast = new Date(calYear, calMonth, parseInt(c.day, 10)) < today;
+      const isSel = sel === c.iso;
+      let cls = '';
+      if (isPast) cls += ' dp-muted';
+      if (c.iso === todayIso && !isSel) cls += ' dp-today';
+      if (isSel) cls += ' dp-sel';
+      return {
+        empty: false, real: true, day: c.day, cls: cls.trim(),
+        onClick: isPast ? () => {} : () => this._selectDate(c.iso)
+      };
+    });
+
+    // selected-date label (e.g. "15 Iunie 2026") or placeholder
+    let dateDisplay = t.contact.datePh, dateValueCls = 'dp-ph';
+    if (sel){
+      const p = sel.split('-');
+      dateDisplay = parseInt(p[2], 10) + ' ' + t.contact.months[parseInt(p[1], 10) - 1] + ' ' + p[0];
+      dateValueCls = '';
+    }
+    const shiftMonth = (delta) => this.setState(s => {
+      const d = new Date(s.calYear, s.calMonth + delta, 1);
+      return { calYear: d.getFullYear(), calMonth: d.getMonth() };
+    });
+
+    return {
+      t: t,
+      navLinks: navLinks,
+      acts: t.acts.items,
+      gallery: gallery,
+      occasions: t.events.items,
+      testimonials: t.testimonials.items,
+      eventTypes: t.eventTypes,
+
+      isMobile: this.state.isMobile,
+      notMobile: !this.state.isMobile,
+      menuOpen: this.state.menuOpen,
+      submitted: this.state.submitted,
+      notSubmitted: !this.state.submitted,
+
+      // language selector
+      isRo: isRo,
+      isEn: isEn,
+      setRo: () => this.setState({ lang: 'ro' }),
+      setEn: () => this.setState({ lang: 'en' }),
+      roBtnStyle:  segSmall + (isRo ? activeFill : inactiveFill),
+      enBtnStyle:  segSmall + (isEn ? activeFill : inactiveFill),
+      roBtnStyleM: segBig   + (isRo ? activeFill : inactiveFill),
+      enBtnStyleM: segBig   + (isEn ? activeFill : inactiveFill),
+
+      toggleMenu: () => this.setState(s => {
+        const open = !s.menuOpen;
+        if (this.lenis) { open ? this.lenis.stop() : this.lenis.start(); }
+        return { menuOpen: open };
+      }),
+      closeMenu: () => { if (this.lenis) this.lenis.start(); this.setState({ menuOpen: false }); },
+      onSubmit: (e) => { e.preventDefault(); this.setState({ submitted: true }); },
+
+      // datepicker
+      dateOpen: this.state.dateOpen,
+      dateOpenCls: this.state.dateOpen ? 'is-open' : '',
+      dateValueCls: dateValueCls,
+      dateDisplay: dateDisplay,
+      selectedDate: sel,
+      calLabel: calLabel,
+      weekdays: t.contact.weekdays,
+      calDays: calDays,
+      toggleDate: () => this.setState(s => ({ dateOpen: !s.dateOpen })),
+      calPrev: () => shiftMonth(-1),
+      calNext: () => shiftMonth(1),
+      calToday: () => this.setState({ calYear: today.getFullYear(), calMonth: today.getMonth(), selectedDate: todayIso, dateOpen: false }),
+      calClear: () => this.setState({ selectedDate: '', dateOpen: false }),
+
+      heroEmbers: this._embers(16, 'h'),
+      footerEmbers: this._embers(10, 'f')
+    };
+  }
+}
+</script>
+</body>
+</html>
