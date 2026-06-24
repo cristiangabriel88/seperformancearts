@@ -14,7 +14,7 @@
   <meta property="og:title" content="Stefan Ecliserescu · Arta Spectacolului cu Foc & Flow">
   <meta property="og:description" content="Te joci cu focul, profesionist. Spectacole de foc și flow cinematice pentru evenimente de neuitat.">
   <meta property="og:type" content="website">
-  <meta name="theme-color" content="#0b0908">
+  <meta name="theme-color" content="#15110d">
   <link rel="icon" type="image/svg+xml" href="logo.svg">
   <link rel="apple-touch-icon" href="logo.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22,147 +22,75 @@
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Hanken+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <!-- Lenis: premium momentum smooth-scroll (the "keep gliding after you lift off" feel) -->
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js" defer></script>
-  <style>
-    *{box-sizing:border-box;}
-    html{scroll-behavior:smooth;}
-    /* Lenis takes over wheel scrolling - it manages scroll-behavior via the lenis-smooth class */
-    html.lenis,html.lenis body{height:auto;}
-    .lenis.lenis-smooth{scroll-behavior:auto!important;}
-    .lenis.lenis-smooth [data-lenis-prevent]{overscroll-behavior:contain;}
-    .lenis.lenis-stopped{overflow:hidden;}
-    .lenis.lenis-smooth iframe{pointer-events:none;}
-    body{margin:0;background:#0b0908;color:#f3ede2;font-family:'Hanken Grotesk',system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
-    ::selection{background:#ff5a1f;color:#0b0908;}
-    a{color:inherit;text-decoration:none;}
-    input,select,textarea,button{font-family:inherit;}
-    body.reveal-ready [data-reveal]{opacity:0;transform:translateY(30px);}
-    body.reveal-ready [data-reveal].in{opacity:1;transform:none;}
-    [data-reveal]{transition:opacity .9s cubic-bezier(.22,.7,.2,1),transform .9s cubic-bezier(.22,.7,.2,1);}
-    body.nav-solid #site-nav{background:rgba(11,9,8,.82)!important;backdrop-filter:blur(18px) saturate(1.2)!important;-webkit-backdrop-filter:blur(18px) saturate(1.2)!important;box-shadow:0 10px 40px rgba(0,0,0,.45)!important;border-bottom:1px solid rgba(255,140,70,.14)!important;}
-    @keyframes emberRise{0%{transform:translateY(0) translateX(0);opacity:0;}12%{opacity:.9;}90%{opacity:.5;}100%{transform:translateY(-120vh) translateX(var(--dx,20px));opacity:0;}}
-    @keyframes glowPulse{0%,100%{opacity:.55;transform:scale(1);}50%{opacity:.85;transform:scale(1.08);}}
-    @keyframes scrollBob{0%,100%{transform:translateY(0);opacity:.5;}50%{transform:translateY(8px);opacity:1;}}
-    @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto!important;}[data-reveal]{opacity:1!important;transform:none!important;transition:none!important;}}
-    .g-tile{display:grid;place-items:center;background:repeating-linear-gradient(135deg,#1a1410,#1a1410 14px,#211913 14px,#211913 28px);transition:transform .6s cubic-bezier(.2,.7,.2,1);}
-    .ar-4x5{aspect-ratio:4/5;}
-    .ar-9x16{aspect-ratio:9/16;}
-    .ar-1x1{aspect-ratio:1/1;}
-    .ar-16x9{aspect-ratio:16/9;}
-    /* two stacked hero video layers crossfaded for a seamless loop (no restart stall) */
-    .hero-layer{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;opacity:0;transition:opacity .6s linear;will-change:opacity;}
-    /* hero video frame: gentle fade to black - sides + lower part */
-    .hero-fade{position:absolute;inset:0;pointer-events:none;
-      background:
-        linear-gradient(90deg,#0b0908,rgba(11,9,8,0) 9%,rgba(11,9,8,0) 91%,#0b0908),
-        linear-gradient(0deg,#0b0908 0%,rgba(11,9,8,0) 22%),
-        linear-gradient(180deg,rgba(11,9,8,.18) 0%,rgba(11,9,8,0) 18%);}
-    @media (max-width:860px){
-      /* no side fade on mobile - only the lower + top fades */
-      .hero-fade{background:
-        linear-gradient(0deg,#0b0908 0%,rgba(11,9,8,0) 22%),
-        linear-gradient(180deg,rgba(11,9,8,.18) 0%,rgba(11,9,8,0) 18%);}
-    }
-    /* contact form two-up row: stacks (date under event type) on phones */
-    .c-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
-    @media (max-width:600px){.c-grid-2{grid-template-columns:1fr;}}
-    /* ---- custom datepicker, styled in the app's fire palette ---- */
-    .dp-wrap{position:relative;}
-    .dp-field{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;padding:13px 15px;border-radius:11px;background:rgba(11,9,8,.6);border:1px solid rgba(255,140,70,.18);color:#f3ede2;font-size:15px;cursor:pointer;text-align:left;transition:border-color .25s,box-shadow .25s;}
-    .dp-field:hover{border-color:rgba(255,140,70,.4);}
-    .dp-field:focus-visible{outline:none;border-color:#ff5a1f;}
-    .dp-field.is-open{border-color:#ff5a1f;box-shadow:0 0 0 3px rgba(255,90,31,.16);}
-    .dp-val.dp-ph{color:#8a8076;}
-    .dp-ico{flex:none;color:#ff8a4b;}
-    .dp-pop{position:absolute;z-index:40;top:calc(100% + 10px);left:0;width:min(330px,calc(100vw - 56px));padding:16px;border-radius:18px;background:linear-gradient(160deg,#241a14,#15100c);border:1px solid rgba(255,140,70,.22);box-shadow:0 24px 60px rgba(0,0,0,.55);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);animation:dpIn .22s cubic-bezier(.2,.7,.2,1);}
-    @keyframes dpIn{from{opacity:0;transform:translateY(-6px) scale(.98);}to{opacity:1;transform:none;}}
-    .dp-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
-    .dp-title{font-family:'Syne',sans-serif;font-weight:600;font-size:16px;color:#f3ede2;text-transform:capitalize;}
-    .dp-nav{display:grid;place-items:center;width:32px;height:32px;border-radius:9px;background:rgba(255,140,70,.08);border:1px solid rgba(255,140,70,.18);color:#f3ede2;font-size:18px;line-height:1;cursor:pointer;transition:background .2s,border-color .2s;}
-    .dp-nav:hover{background:rgba(255,90,31,.22);border-color:rgba(255,140,70,.5);}
-    .dp-week{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-bottom:6px;}
-    .dp-week span{text-align:center;font-size:11px;font-weight:600;letter-spacing:.04em;color:#8a8076;text-transform:uppercase;padding:4px 0;}
-    .dp-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;}
-    .dp-cell-empty{aspect-ratio:1/1;}
-    .dp-day{aspect-ratio:1/1;display:grid;place-items:center;border:0;border-radius:9px;background:transparent;color:#e3dacd;font-size:14px;font-weight:500;cursor:pointer;transition:background .18s,color .18s,transform .12s;}
-    .dp-day:hover{background:rgba(255,140,70,.16);}
-    .dp-day:active{transform:scale(.92);}
-    .dp-day.dp-today{box-shadow:inset 0 0 0 1px rgba(255,140,70,.55);}
-    .dp-day.dp-sel{background:linear-gradient(135deg,#ffce5a,#ff5a1f);color:#0b0908;font-weight:700;box-shadow:0 6px 18px rgba(255,90,31,.4);}
-    .dp-day.dp-sel:hover{background:linear-gradient(135deg,#ffce5a,#ff5a1f);}
-    .dp-day.dp-muted{color:#5b524a;cursor:default;}
-    .dp-day.dp-muted:hover{background:transparent;}
-    .dp-foot{display:flex;gap:8px;margin-top:14px;padding-top:12px;border-top:1px solid rgba(255,140,70,.12);}
-    .dp-foot-btn{flex:1;padding:9px;border-radius:9px;background:rgba(255,140,70,.08);border:1px solid rgba(255,140,70,.18);color:#cfc6ba;font-size:13px;font-weight:600;cursor:pointer;transition:background .2s,color .2s;}
-    .dp-foot-btn:hover{background:rgba(255,90,31,.2);color:#fff;}
-  </style>
+  <link rel="stylesheet" href="style.css">
 </helmet>
 
 <!-- ============ NAV ============ -->
-<nav id="site-nav" style="position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:clamp(14px,2vw,20px) clamp(20px,5vw,48px);background:transparent;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);transition:background .4s ease,box-shadow .4s ease,border-color .4s ease;border-bottom:1px solid rgba(255,140,70,0);">
-  <a href="#hero" aria-label="Stefan Ecliserescu acasă" style="display:flex;align-items:center;gap:12px;flex:none;">
-    <span aria-hidden="true" style="display:grid;place-items:center;width:38px;height:38px;border-radius:10px;background:linear-gradient(140deg,#ff7a2f,#7e1604);box-shadow:0 0 22px rgba(255,90,31,.5);"><svg width="22" height="22" viewBox="0 0 64 64" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" fill="#0b0908" d="M34.7 11c0 8 8 13.3 13.3 22.7C50.7 39.3 52 43.3 52 47c0 11.7-9.6 18-20 18s-20-6.3-20-18c0-10.7 8-20 12-29.3 1.3 5.3 5.3 8 6.7 13.3 1.9-9.3-1.3-17.3 4-20Zm-2.7 49.3c6.7 0 12-5.1 12-11.9 0-3.8-1.6-6.4-4.1-9.7-.5 3.7-3.2 5.9-5.6 5.9 2.4-4.8-.5-10.1-1.3-12.3-2.7 4-6.9 8-6.9 16.1 0 6.8 4.5 11.9 5.9 11.9Z"/></svg></span>
-    <span style="font-family:'Syne',sans-serif;font-weight:600;letter-spacing:.16em;font-size:13px;text-transform:uppercase;color:#f3ede2;">Stefan&nbsp;Ecliserescu</span>
+<nav id="site-nav">
+  <a href="#hero" aria-label="Stefan Ecliserescu acasă" class="nav-logo">
+    <span aria-hidden="true" class="nav-logo-mark"><svg width="22" height="22" viewBox="0 0 64 64" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" fill="#0b0908" d="M34.7 11c0 8 8 13.3 13.3 22.7C50.7 39.3 52 43.3 52 47c0 11.7-9.6 18-20 18s-20-6.3-20-18c0-10.7 8-20 12-29.3 1.3 5.3 5.3 8 6.7 13.3 1.9-9.3-1.3-17.3 4-20Zm-2.7 49.3c6.7 0 12-5.1 12-11.9 0-3.8-1.6-6.4-4.1-9.7-.5 3.7-3.2 5.9-5.6 5.9 2.4-4.8-.5-10.1-1.3-12.3-2.7 4-6.9 8-6.9 16.1 0 6.8 4.5 11.9 5.9 11.9Z"/></svg></span>
+    <span class="nav-logo-text">Stefan&nbsp;Ecliserescu</span>
   </a>
 
   <sc-if value="{{ notMobile }}" hint-placeholder-val="{{ true }}">
-    <div style="display:flex;align-items:center;gap:clamp(18px,2.4vw,38px);">
+    <div class="nav-links">
       <sc-for list="{{ navLinks }}" as="link" hint-placeholder-count="5">
-        <a href="{{ link.href }}" style="font-size:14px;font-weight:500;letter-spacing:.02em;color:#cfc6ba;padding:6px 0;border-bottom:1px solid transparent;transition:color .25s,border-color .25s;" style-hover="color:#ffffff;border-bottom:1px solid #ff5a1f;">{{ link.label }}</a>
+        <a href="{{ link.href }}" class="nav-link">{{ link.label }}</a>
       </sc-for>
       <!-- language selector -->
-      <div role="group" aria-label="{{ t.langLabel }}" style="display:flex;align-items:center;border:1px solid rgba(255,140,70,.25);border-radius:100px;padding:3px;gap:2px;">
-        <button onClick="{{ setRo }}" aria-pressed="{{ isRo }}" style="{{ roBtnStyle }}">RO</button>
-        <button onClick="{{ setEn }}" aria-pressed="{{ isEn }}" style="{{ enBtnStyle }}">EN</button>
+      <div role="group" aria-label="{{ t.langLabel }}" class="lang-group">
+        <button onClick="{{ setRo }}" aria-pressed="{{ isRo }}" class="seg seg-sm {{ roBtnActive }}">RO</button>
+        <button onClick="{{ setEn }}" aria-pressed="{{ isEn }}" class="seg seg-sm {{ enBtnActive }}">EN</button>
       </div>
-      <a href="#contact" style="display:inline-flex;align-items:center;gap:8px;padding:11px 22px;border-radius:100px;font-size:14px;font-weight:600;color:#0b0908;background:linear-gradient(135deg,#ffce5a,#ff5a1f);box-shadow:0 6px 24px rgba(255,90,31,.34);transition:transform .25s,box-shadow .25s;" style-hover="transform:translateY(-2px);box-shadow:0 10px 30px rgba(255,90,31,.5);">{{ t.book }}</a>
+      <a href="#contact" class="btn-book">{{ t.book }}</a>
     </div>
   </sc-if>
 
   <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
-    <button onClick="{{ toggleMenu }}" aria-label="{{ t.openMenu }}" aria-expanded="{{ menuOpen }}" style="flex:none;display:grid;gap:5px;background:transparent;border:0;padding:8px;cursor:pointer;">
-      <span aria-hidden="true" style="display:block;width:26px;height:2px;border-radius:2px;background:#f3ede2;"></span>
-      <span aria-hidden="true" style="display:block;width:26px;height:2px;border-radius:2px;background:#f3ede2;"></span>
-      <span aria-hidden="true" style="display:block;width:18px;height:2px;border-radius:2px;background:#ff5a1f;"></span>
+    <button onClick="{{ toggleMenu }}" aria-label="{{ t.openMenu }}" aria-expanded="{{ menuOpen }}" class="nav-burger">
+      <span aria-hidden="true" class="burger-line"></span>
+      <span aria-hidden="true" class="burger-line"></span>
+      <span aria-hidden="true" class="burger-line burger-line--short"></span>
     </button>
   </sc-if>
 </nav>
 
 <!-- ============ SCROLL PROGRESS - a fuse burning down ============ -->
-<div id="scroll-fuse" aria-hidden="true" style="position:fixed;top:0;left:0;height:2px;width:0;z-index:130;background:linear-gradient(90deg,#ff5a1f 0%,#ffce5a 100%);box-shadow:0 0 10px rgba(255,90,31,.85),0 0 4px #ffce5a;border-radius:0 2px 2px 0;will-change:width;pointer-events:none;"></div>
+<div id="scroll-fuse" aria-hidden="true"></div>
 
 <!-- ============ MOBILE MENU OVERLAY ============ -->
 <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
-  <div style="position:fixed;inset:0;z-index:120;background:rgba(9,7,6,.96);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);display:flex;flex-direction:column;padding:24px clamp(20px,6vw,48px);">
-    <div style="display:flex;align-items:center;justify-content:space-between;">
-      <span style="font-family:'Syne',sans-serif;font-weight:600;letter-spacing:.16em;font-size:13px;text-transform:uppercase;">{{ t.menu }}</span>
-      <button onClick="{{ closeMenu }}" aria-label="{{ t.closeMenu }}" style="background:transparent;border:0;color:#f3ede2;font-size:30px;line-height:1;cursor:pointer;padding:4px 8px;">&times;</button>
+  <div class="mobile-menu">
+    <div class="mobile-menu-head">
+      <span class="mobile-menu-title">{{ t.menu }}</span>
+      <button onClick="{{ closeMenu }}" aria-label="{{ t.closeMenu }}" class="mobile-menu-close">&times;</button>
     </div>
-    <div style="display:flex;flex-direction:column;gap:6px;margin-top:48px;">
+    <div class="mobile-menu-links">
       <sc-for list="{{ navLinks }}" as="link" hint-placeholder-count="5">
-        <a href="{{ link.href }}" onClick="{{ closeMenu }}" style="font-family:'Syne',sans-serif;font-size:34px;font-weight:600;padding:14px 0;border-bottom:1px solid rgba(255,140,70,.12);color:#f3ede2;">{{ link.label }}</a>
+        <a href="{{ link.href }}" onClick="{{ closeMenu }}" class="mobile-menu-link">{{ link.label }}</a>
       </sc-for>
     </div>
     <!-- language selector -->
-    <div style="margin-top:36px;">
-      <span style="display:block;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:#7d736a;margin-bottom:12px;">{{ t.langLabel }}</span>
-      <div role="group" aria-label="{{ t.langLabel }}" style="display:inline-flex;align-items:center;border:1px solid rgba(255,140,70,.25);border-radius:100px;padding:4px;gap:4px;">
-        <button onClick="{{ setRo }}" aria-pressed="{{ isRo }}" style="{{ roBtnStyleM }}">Română</button>
-        <button onClick="{{ setEn }}" aria-pressed="{{ isEn }}" style="{{ enBtnStyleM }}">English</button>
+    <div class="mobile-lang">
+      <span class="mobile-lang-label">{{ t.langLabel }}</span>
+      <div role="group" aria-label="{{ t.langLabel }}" class="lang-group lang-group--lg">
+        <button onClick="{{ setRo }}" aria-pressed="{{ isRo }}" class="seg seg-lg {{ roBtnActive }}">Română</button>
+        <button onClick="{{ setEn }}" aria-pressed="{{ isEn }}" class="seg seg-lg {{ enBtnActive }}">English</button>
       </div>
     </div>
-    <a href="#contact" onClick="{{ closeMenu }}" style="margin-top:auto;text-align:center;padding:18px;border-radius:100px;font-weight:600;color:#0b0908;background:linear-gradient(135deg,#ffce5a,#ff5a1f);">{{ t.book }}</a>
+    <a href="#contact" onClick="{{ closeMenu }}" class="mobile-book">{{ t.book }}</a>
   </div>
 </sc-if>
 
 <!-- ============ HERO (overlay around existing fire video) ============ -->
-<section id="hero" style="position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-start;overflow:hidden;">
+<section id="hero">
   <!-- existing autoplaying muted looping fire video -->
-  <div id="hero-media" aria-hidden="true" style="position:absolute;inset:0;z-index:0;display:flex;align-items:center;justify-content:center;background:#0b0908;overflow:hidden;">
+  <div id="hero-media" aria-hidden="true">
     <!-- cap the video near its native width (1764px) so big screens don't upscale & pixelate -->
-    <div style="position:relative;width:100%;height:100%;max-width:1640px;overflow:hidden;">
+    <div class="hero-media-cap">
       <!-- single native-looping video: clip is a ping-pong (start≈end frame) so loop is seamless -->
-      <div id="hero-video" style="position:absolute;inset:0;will-change:transform;">
-        <video class="hero-layer" autoplay muted loop playsinline preload="auto" style="opacity:1;">
+      <div id="hero-video">
+        <video class="hero-layer is-on" autoplay muted loop playsinline preload="auto">
           <source src="loop_pingpong.webm" type="video/webm">
           <source src="loop_pingpong.mp4" type="video/mp4">
         </video>
@@ -171,47 +99,46 @@
       <div class="hero-fade"></div>
     </div>
   </div>
-  <div id="hero-content" style="position:relative;z-index:3;max-width:1100px;width:100%;margin:0 auto;padding:clamp(96px,16vh,170px) clamp(20px,5vw,48px) 0;text-align:center;">
-    <h1 style="margin:0;font-family:'Syne',sans-serif;font-weight:700;line-height:1;letter-spacing:-.01em;font-size:clamp(30px,6.2vw,78px);text-wrap:balance;text-shadow:0 2px 44px rgba(0,0,0,.7),0 0 80px rgba(0,0,0,.4);">{{ t.tagline }}</h1>
+  <div id="hero-content">
+    <h1 class="hero-title">{{ t.tagline }}</h1>
   </div>
 
   <!-- scroll indicator -->
-  <a href="#about" aria-label="{{ t.scrollAria }}" style="position:absolute;left:50%;bottom:26px;transform:translateX(-50%);z-index:3;display:flex;flex-direction:column;align-items:center;gap:8px;color:#b9b0a4;">
-    <span style="font-size:10px;letter-spacing:.34em;text-transform:uppercase;">{{ t.scroll }}</span>
-    <span aria-hidden="true" style="display:block;width:1px;height:40px;background:linear-gradient(180deg,#ff5a1f,transparent);animation:scrollBob 2s ease-in-out infinite;"></span>
+  <a href="#about" aria-label="{{ t.scrollAria }}" class="hero-scroll">
+    <span class="hero-scroll-label">{{ t.scroll }}</span>
+    <span aria-hidden="true" class="hero-scroll-line"></span>
   </a>
 </section>
 
 <!-- ============ ABOUT ============ -->
-<section id="about" style="position:relative;padding:clamp(90px,13vw,170px) clamp(20px,5vw,48px);">
-  <div aria-hidden="true" style="position:absolute;top:6%;left:-120px;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(255,90,31,.16),transparent 70%);filter:blur(40px);animation:glowPulse 9s ease-in-out infinite;pointer-events:none;"></div>
-  <div style="position:relative;max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:clamp(40px,6vw,90px);align-items:center;">
+<section id="about" class="section">
+  <div aria-hidden="true" class="glow glow--about"></div>
+  <div class="about-grid">
     <div data-reveal>
-      <span style="font-size:12px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:#ff5a1f;">{{ t.about.kicker }}</span>
-      <h2 style="margin:18px 0 0;font-family:'Syne',sans-serif;font-weight:600;line-height:1.02;letter-spacing:-.02em;font-size:clamp(32px,5.5vw,64px);text-wrap:balance;">{{ t.about.h2 }}</h2>
-      <p style="margin:28px 0 0;font-size:clamp(16px,1.7vw,19px);line-height:1.65;color:#bdb4a8;max-width:54ch;">{{ t.about.p1 }}</p>
-      <p style="margin:18px 0 0;font-size:clamp(16px,1.7vw,19px);line-height:1.65;color:#bdb4a8;max-width:54ch;">{{ t.about.p2 }}</p>
+      <span class="kicker">{{ t.about.kicker }}</span>
+      <h2 class="section-h2">{{ t.about.h2 }}</h2>
+      <p class="about-p about-p--first">{{ t.about.p1 }}</p>
+      <p class="about-p">{{ t.about.p2 }}</p>
     </div>
-    <div data-reveal style="border-radius:18px;overflow:hidden;border:1px solid rgba(255,140,70,.12);box-shadow:0 30px 70px rgba(0,0,0,.45);">
-      <img src="gallery/2.jpg" alt="{{ t.about.imgAlt }}" loading="lazy" style="width:100%;height:100%;aspect-ratio:4/5;object-fit:cover;display:block;">
+    <div data-reveal class="about-media">
+      <img src="gallery/2.jpg" alt="{{ t.about.imgAlt }}" loading="lazy" class="about-img">
     </div>
   </div>
 </section>
 
 <!-- ============ ACTS / SERVICES ============ -->
-<section id="acts" style="position:relative;padding:clamp(90px,13vw,170px) clamp(20px,5vw,48px);">
-  <div style="max-width:1200px;margin:0 auto;">
-    <div data-reveal style="max-width:680px;">
-      <span style="font-size:12px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:#ff5a1f;">{{ t.acts.kicker }}</span>
-      <h2 style="margin:18px 0 0;font-family:'Syne',sans-serif;font-weight:600;line-height:1.02;letter-spacing:-.02em;font-size:clamp(32px,5.5vw,64px);">{{ t.acts.h2 }}</h2>
+<section id="acts" class="section">
+  <div class="container">
+    <div data-reveal class="section-head">
+      <span class="kicker">{{ t.acts.kicker }}</span>
+      <h2 class="section-h2">{{ t.acts.h2 }}</h2>
     </div>
-    <div style="margin-top:clamp(40px,5vw,64px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:20px;">
+    <div class="acts-grid">
       <sc-for list="{{ acts }}" as="act" hint-placeholder-count="4">
-        <article data-reveal style="position:relative;padding:34px 28px;border-radius:20px;background:linear-gradient(160deg,rgba(32,24,19,.7),rgba(18,14,11,.5));border:1px solid rgba(255,140,70,.13);backdrop-filter:blur(8px);overflow:hidden;transition:transform .35s cubic-bezier(.2,.7,.2,1),border-color .35s,box-shadow .35s;" style-hover="transform:translateY(-6px);border-color:rgba(255,140,70,.4);box-shadow:0 20px 50px rgba(0,0,0,.4);">
-          <span aria-hidden="true" style="position:absolute;top:-30px;right:-10px;font-family:'Syne',sans-serif;font-weight:700;font-size:96px;line-height:1;color:rgba(255,90,31,.12);">{{ act.no }}</span>
-          <span aria-hidden="true" style="display:block;width:44px;height:44px;border-radius:12px;background:linear-gradient(140deg,rgba(255,206,90,.22),rgba(255,90,31,.22));border:1px solid rgba(255,140,70,.3);box-shadow:0 0 22px rgba(255,90,31,.25);"></span>
-          <h3 style="margin:22px 0 0;font-family:'Syne',sans-serif;font-weight:600;font-size:23px;">{{ act.title }}</h3>
-          <p style="margin:12px 0 0;font-size:15px;line-height:1.6;color:#b1a89d;">{{ act.desc }}</p>
+        <article data-reveal class="act-card">
+          <span aria-hidden="true" class="act-icon"></span>
+          <h3 class="act-title">{{ act.title }}</h3>
+          <p class="act-desc">{{ act.desc }}</p>
         </article>
       </sc-for>
     </div>
@@ -219,22 +146,22 @@
 </section>
 
 <!-- ============ GALLERY (masonry, hover zoom) ============ -->
-<section id="gallery" style="position:relative;padding:clamp(90px,13vw,170px) clamp(20px,5vw,48px);background:linear-gradient(180deg,transparent,rgba(20,15,11,.5),transparent);">
-  <div style="max-width:1280px;margin:0 auto;">
-    <div data-reveal style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:clamp(34px,4vw,52px);">
-      <div style="max-width:680px;">
-        <span style="font-size:12px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:#ff5a1f;">{{ t.gallery.kicker }}</span>
-        <h2 style="margin:18px 0 0;font-family:'Syne',sans-serif;font-weight:600;line-height:1.02;letter-spacing:-.02em;font-size:clamp(32px,5.5vw,64px);">{{ t.gallery.h2 }}</h2>
+<section id="gallery" class="section">
+  <div class="container--wide">
+    <div data-reveal class="gallery-head">
+      <div class="section-head">
+        <span class="kicker">{{ t.gallery.kicker }}</span>
+        <h2 class="section-h2">{{ t.gallery.h2 }}</h2>
       </div>
-      <a href="https://www.instagram.com/seperformancearts/" target="_blank" rel="noopener" style="font-size:14px;font-weight:600;color:#ffce5a;border-bottom:1px solid rgba(255,206,90,.4);padding-bottom:3px;">{{ t.gallery.more }}</a>
+      <a href="https://www.instagram.com/seperformancearts/" target="_blank" rel="noopener" class="gallery-more">{{ t.gallery.more }}</a>
     </div>
     <!-- masonry via CSS columns; swap placeholders for real photos/clips -->
-    <div data-reveal style="columns:260px;column-gap:18px;">
+    <div data-reveal class="masonry">
       <sc-for list="{{ gallery }}" as="g" hint-placeholder-count="8">
-        <figure style="break-inside:avoid;margin:0 0 18px;border-radius:16px;overflow:hidden;border:1px solid rgba(255,140,70,.12);position:relative;">
-          <img src="{{ g.src }}" alt="{{ g.label }}" loading="lazy" class="g-tile {{ g.cls }}" style="width:100%;height:100%;object-fit:cover;display:block;" style-hover="transform:scale(1.08);">
+        <figure class="masonry-item">
+          <img src="{{ g.src }}" alt="{{ g.label }}" loading="lazy" class="g-tile {{ g.cls }}">
           <sc-if value="{{ g.video }}" hint-placeholder-val="{{ false }}">
-            <span aria-hidden="true" style="position:absolute;top:12px;left:12px;display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:rgba(11,9,8,.65);border:1px solid rgba(255,255,255,.25);color:#fff;font-size:12px;backdrop-filter:blur(4px);">&#9658;</span>
+            <span aria-hidden="true" class="play-badge">&#9658;</span>
           </sc-if>
         </figure>
       </sc-for>
@@ -243,18 +170,18 @@
 </section>
 
 <!-- ============ EVENTS / BOOKING OCCASIONS ============ -->
-<section id="events" style="position:relative;padding:clamp(90px,13vw,170px) clamp(20px,5vw,48px);overflow:hidden;">
-  <div aria-hidden="true" style="position:absolute;bottom:-10%;right:-140px;width:480px;height:480px;border-radius:50%;background:radial-gradient(circle,rgba(255,147,51,.16),transparent 70%);filter:blur(50px);animation:glowPulse 11s ease-in-out infinite;pointer-events:none;"></div>
-  <div style="position:relative;max-width:1200px;margin:0 auto;">
-    <div data-reveal style="max-width:680px;">
-      <span style="font-size:12px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:#ff5a1f;">{{ t.events.kicker }}</span>
-      <h2 style="margin:18px 0 0;font-family:'Syne',sans-serif;font-weight:600;line-height:1.02;letter-spacing:-.02em;font-size:clamp(32px,5.5vw,64px);">{{ t.events.h2 }}</h2>
+<section id="events" class="section section--clip">
+  <div aria-hidden="true" class="glow glow--events"></div>
+  <div class="container--rel">
+    <div data-reveal class="section-head">
+      <span class="kicker">{{ t.events.kicker }}</span>
+      <h2 class="section-h2">{{ t.events.h2 }}</h2>
     </div>
-    <div style="margin-top:clamp(40px,5vw,64px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:16px;">
+    <div class="events-grid">
       <sc-for list="{{ occasions }}" as="o" hint-placeholder-count="6">
-        <div data-reveal style="padding:26px 24px;border-radius:18px;background:linear-gradient(160deg,rgba(32,24,19,.6),rgba(18,14,11,.4));border:1px solid rgba(255,140,70,.13);transition:border-color .3s,background .3s;" style-hover="border-color:rgba(255,140,70,.4);background:linear-gradient(160deg,rgba(40,29,22,.75),rgba(22,16,12,.5));">
-          <h3 style="margin:0;font-family:'Syne',sans-serif;font-weight:600;font-size:20px;">{{ o.title }}</h3>
-          <p style="margin:8px 0 0;font-size:14px;line-height:1.55;color:#a99f93;">{{ o.desc }}</p>
+        <div data-reveal class="event-card">
+          <h3 class="event-title">{{ o.title }}</h3>
+          <p class="event-desc">{{ o.desc }}</p>
         </div>
       </sc-for>
     </div>
@@ -262,20 +189,20 @@
 </section>
 
 <!-- ============ TESTIMONIALS ============ -->
-<section id="testimonials" style="position:relative;padding:clamp(90px,13vw,170px) clamp(20px,5vw,48px);">
-  <div style="max-width:1200px;margin:0 auto;">
-    <div data-reveal style="text-align:center;max-width:640px;margin:0 auto;">
-      <span style="font-size:12px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:#ff5a1f;">{{ t.testimonials.kicker }}</span>
-      <h2 style="margin:18px 0 0;font-family:'Syne',sans-serif;font-weight:600;line-height:1.02;letter-spacing:-.02em;font-size:clamp(32px,5.5vw,64px);">{{ t.testimonials.h2 }}</h2>
+<section id="testimonials" class="section">
+  <div class="container">
+    <div data-reveal class="section-head--center">
+      <span class="kicker">{{ t.testimonials.kicker }}</span>
+      <h2 class="section-h2">{{ t.testimonials.h2 }}</h2>
     </div>
-    <div style="margin-top:clamp(40px,5vw,64px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:20px;">
+    <div class="tst-grid">
       <sc-for list="{{ testimonials }}" as="t" hint-placeholder-count="3">
-        <figure data-reveal style="margin:0;padding:34px 30px;border-radius:20px;background:linear-gradient(160deg,rgba(32,24,19,.55),rgba(18,14,11,.4));border:1px solid rgba(255,140,70,.13);backdrop-filter:blur(8px);">
-          <span aria-hidden="true" style="font-family:'Syne',sans-serif;font-size:54px;line-height:.4;color:rgba(255,90,31,.5);">&ldquo;</span>
-          <blockquote style="margin:18px 0 0;font-size:18px;line-height:1.55;color:#e3dacd;">{{ t.quote }}</blockquote>
-          <figcaption style="margin-top:24px;display:flex;align-items:center;gap:12px;">
-            <span aria-hidden="true" style="width:38px;height:38px;border-radius:50%;background:linear-gradient(140deg,#ff7a2f,#7e1604);flex:none;"></span>
-            <span><span style="display:block;font-weight:600;font-size:14px;">{{ t.name }}</span><span style="display:block;font-size:13px;color:#a99f93;">{{ t.role }}</span></span>
+        <figure data-reveal class="tst-card">
+          <span aria-hidden="true" class="tst-mark">&ldquo;</span>
+          <blockquote class="tst-quote">{{ t.quote }}</blockquote>
+          <figcaption class="tst-cap">
+            <span aria-hidden="true" class="tst-avatar"></span>
+            <span><span class="tst-name">{{ t.name }}</span><span class="tst-role">{{ t.role }}</span></span>
           </figcaption>
         </figure>
       </sc-for>
@@ -284,44 +211,44 @@
 </section>
 
 <!-- ============ CONTACT / BOOKING ============ -->
-<section id="contact" style="position:relative;padding:clamp(90px,13vw,170px) clamp(20px,5vw,48px);overflow:hidden;">
-  <div aria-hidden="true" style="position:absolute;top:-60px;left:50%;transform:translateX(-50%);width:600px;height:300px;background:radial-gradient(60% 100% at 50% 0,rgba(255,90,31,.2),transparent 70%);filter:blur(40px);pointer-events:none;"></div>
-  <div style="position:relative;max-width:980px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:clamp(36px,5vw,64px);align-items:start;">
+<section id="contact" class="section section--clip">
+  <div aria-hidden="true" class="glow glow--contact"></div>
+  <div class="contact-grid">
     <div data-reveal>
-      <span style="font-size:12px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:#ff5a1f;">{{ t.contact.kicker }}</span>
-      <h2 style="margin:18px 0 0;font-family:'Syne',sans-serif;font-weight:600;line-height:1.02;letter-spacing:-.02em;font-size:clamp(32px,5.5vw,56px);">{{ t.contact.h2 }}</h2>
-      <p style="margin:22px 0 0;font-size:16px;line-height:1.65;color:#b1a89d;max-width:42ch;">{{ t.contact.lead }}</p>
-      <div style="margin-top:32px;display:flex;flex-direction:column;gap:14px;">
-        <a href="https://www.instagram.com/seperformancearts/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:12px;font-size:15px;color:#e3dacd;" style-hover="color:#ffce5a;">
-          <span aria-hidden="true" style="display:grid;place-items:center;width:38px;height:38px;border-radius:11px;background:rgba(255,90,31,.12);border:1px solid rgba(255,140,70,.3);">&#9685;</span>
+      <span class="kicker">{{ t.contact.kicker }}</span>
+      <h2 class="section-h2 section-h2--sm">{{ t.contact.h2 }}</h2>
+      <p class="contact-lead">{{ t.contact.lead }}</p>
+      <div class="contact-links">
+        <a href="https://www.instagram.com/seperformancearts/" target="_blank" rel="noopener" class="contact-link">
+          <span aria-hidden="true" class="contact-ico">&#9685;</span>
           @seperformancearts
         </a>
-        <a href="mailto:contact@seperformancearts.com" style="display:inline-flex;align-items:center;gap:12px;font-size:15px;color:#e3dacd;" style-hover="color:#ffce5a;">
-          <span aria-hidden="true" style="display:grid;place-items:center;width:38px;height:38px;border-radius:11px;background:rgba(255,90,31,.12);border:1px solid rgba(255,140,70,.3);">@</span>
+        <a href="mailto:contact@seperformancearts.com" class="contact-link">
+          <span aria-hidden="true" class="contact-ico">@</span>
           contact@seperformancearts.com
         </a>
       </div>
     </div>
 
-    <div data-reveal style="padding:clamp(26px,3vw,38px);border-radius:24px;background:linear-gradient(160deg,rgba(32,24,19,.7),rgba(16,12,10,.55));border:1px solid rgba(255,140,70,.16);backdrop-filter:blur(10px);box-shadow:0 30px 80px rgba(0,0,0,.4);">
+    <div data-reveal class="contact-card">
       <sc-if value="{{ notSubmitted }}" hint-placeholder-val="{{ true }}">
-        <form onSubmit="{{ onSubmit }}" style="display:flex;flex-direction:column;gap:16px;">
-          <label style="display:flex;flex-direction:column;gap:7px;font-size:13px;font-weight:500;color:#b1a89d;">{{ t.contact.name }}
-            <input type="text" name="name" required placeholder="{{ t.contact.namePh }}" style="padding:13px 15px;border-radius:11px;background:rgba(11,9,8,.6);border:1px solid rgba(255,140,70,.18);color:#f3ede2;font-size:15px;outline:none;transition:border-color .25s;" style-focus="border-color:#ff5a1f;">
+        <form onSubmit="{{ onSubmit }}" class="contact-form">
+          <label class="field">{{ t.contact.name }}
+            <input type="text" name="name" required placeholder="{{ t.contact.namePh }}" class="input">
           </label>
-          <label style="display:flex;flex-direction:column;gap:7px;font-size:13px;font-weight:500;color:#b1a89d;">{{ t.contact.email }}
-            <input type="email" name="email" required placeholder="{{ t.contact.emailPh }}" style="padding:13px 15px;border-radius:11px;background:rgba(11,9,8,.6);border:1px solid rgba(255,140,70,.18);color:#f3ede2;font-size:15px;outline:none;transition:border-color .25s;" style-focus="border-color:#ff5a1f;">
+          <label class="field">{{ t.contact.email }}
+            <input type="email" name="email" required placeholder="{{ t.contact.emailPh }}" class="input">
           </label>
           <div class="c-grid-2">
-            <label style="display:flex;flex-direction:column;gap:7px;font-size:13px;font-weight:500;color:#b1a89d;">{{ t.contact.eventType }}
-              <select name="eventType" required style="padding:13px 15px;border-radius:11px;background:rgba(11,9,8,.6);border:1px solid rgba(255,140,70,.18);color:#f3ede2;font-size:15px;outline:none;" style-focus="border-color:#ff5a1f;">
-                <option value="" style="background:#15110d;">{{ t.contact.select }}</option>
+            <label class="field">{{ t.contact.eventType }}
+              <select name="eventType" required class="input">
+                <option value="">{{ t.contact.select }}</option>
                 <sc-for list="{{ eventTypes }}" as="et" hint-placeholder-count="6">
-                  <option value="{{ et }}" style="background:#15110d;">{{ et }}</option>
+                  <option value="{{ et }}">{{ et }}</option>
                 </sc-for>
               </select>
             </label>
-            <div style="display:flex;flex-direction:column;gap:7px;font-size:13px;font-weight:500;color:#b1a89d;"><span>{{ t.contact.date }}</span>
+            <div class="field"><span>{{ t.contact.date }}</span>
               <div class="dp-wrap">
                 <button type="button" onClick="{{ toggleDate }}" aria-haspopup="dialog" aria-expanded="{{ dateOpen }}" class="dp-field {{ dateOpenCls }}">
                   <span class="dp-val {{ dateValueCls }}">{{ dateDisplay }}</span>
@@ -353,17 +280,17 @@
               </div>
             </div>
           </div>
-          <label style="display:flex;flex-direction:column;gap:7px;font-size:13px;font-weight:500;color:#b1a89d;">{{ t.contact.message }}
-            <textarea name="message" rows="4" placeholder="{{ t.contact.messagePh }}" style="padding:13px 15px;border-radius:11px;background:rgba(11,9,8,.6);border:1px solid rgba(255,140,70,.18);color:#f3ede2;font-size:15px;outline:none;resize:vertical;transition:border-color .25s;" style-focus="border-color:#ff5a1f;"></textarea>
+          <label class="field">{{ t.contact.message }}
+            <textarea name="message" rows="4" placeholder="{{ t.contact.messagePh }}" class="input input--area"></textarea>
           </label>
-          <button type="submit" style="margin-top:6px;padding:16px;border:0;border-radius:100px;font-size:16px;font-weight:600;color:#0b0908;background:linear-gradient(135deg,#ffce5a,#ff5a1f);cursor:pointer;box-shadow:0 10px 30px rgba(255,90,31,.36);transition:transform .25s,box-shadow .25s;" style-hover="transform:translateY(-2px);box-shadow:0 14px 40px rgba(255,90,31,.5);">{{ t.contact.submit }}</button>
+          <button type="submit" class="btn-submit">{{ t.contact.submit }}</button>
         </form>
       </sc-if>
       <sc-if value="{{ submitted }}" hint-placeholder-val="{{ false }}">
-        <div style="text-align:center;padding:40px 10px;">
-          <span aria-hidden="true" style="display:inline-grid;place-items:center;width:64px;height:64px;border-radius:50%;background:linear-gradient(140deg,#ffce5a,#ff5a1f);color:#0b0908;font-size:30px;box-shadow:0 0 36px rgba(255,90,31,.5);">&#10003;</span>
-          <h3 style="margin:24px 0 0;font-family:'Syne',sans-serif;font-weight:600;font-size:24px;">{{ t.contact.successTitle }}</h3>
-          <p style="margin:12px 0 0;color:#b1a89d;font-size:15px;">{{ t.contact.successText }}</p>
+        <div class="contact-success">
+          <span aria-hidden="true" class="contact-success-ico">&#10003;</span>
+          <h3 class="contact-success-title">{{ t.contact.successTitle }}</h3>
+          <p class="contact-success-text">{{ t.contact.successText }}</p>
         </div>
       </sc-if>
     </div>
@@ -371,39 +298,39 @@
 </section>
 
 <!-- ============ FOOTER ============ -->
-<footer style="position:relative;padding:clamp(60px,8vw,90px) clamp(20px,5vw,48px) 40px;border-top:1px solid rgba(255,140,70,.12);overflow:hidden;">
-  <div aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;opacity:.7;">{{ footerEmbers }}</div>
-  <div style="position:relative;max-width:1200px;margin:0 auto;">
-    <div style="display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;gap:40px;">
-      <div style="max-width:380px;">
-        <div style="display:flex;align-items:center;gap:12px;">
-          <span aria-hidden="true" style="display:grid;place-items:center;width:40px;height:40px;border-radius:11px;background:linear-gradient(140deg,#ff7a2f,#7e1604);box-shadow:0 0 22px rgba(255,90,31,.5);"><svg width="23" height="23" viewBox="0 0 64 64" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" fill="#0b0908" d="M34.7 11c0 8 8 13.3 13.3 22.7C50.7 39.3 52 43.3 52 47c0 11.7-9.6 18-20 18s-20-6.3-20-18c0-10.7 8-20 12-29.3 1.3 5.3 5.3 8 6.7 13.3 1.9-9.3-1.3-17.3 4-20Zm-2.7 49.3c6.7 0 12-5.1 12-11.9 0-3.8-1.6-6.4-4.1-9.7-.5 3.7-3.2 5.9-5.6 5.9 2.4-4.8-.5-10.1-1.3-12.3-2.7 4-6.9 8-6.9 16.1 0 6.8 4.5 11.9 5.9 11.9Z"/></svg></span>
-          <span style="font-family:'Syne',sans-serif;font-weight:600;letter-spacing:.04em;font-size:18px;">Stefan Ecliserescu</span>
+<footer class="footer">
+  <div aria-hidden="true" class="footer-embers">{{ footerEmbers }}</div>
+  <div class="container--rel">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-brand-row">
+          <span aria-hidden="true" class="footer-mark"><svg width="23" height="23" viewBox="0 0 64 64" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" fill="#0b0908" d="M34.7 11c0 8 8 13.3 13.3 22.7C50.7 39.3 52 43.3 52 47c0 11.7-9.6 18-20 18s-20-6.3-20-18c0-10.7 8-20 12-29.3 1.3 5.3 5.3 8 6.7 13.3 1.9-9.3-1.3-17.3 4-20Zm-2.7 49.3c6.7 0 12-5.1 12-11.9 0-3.8-1.6-6.4-4.1-9.7-.5 3.7-3.2 5.9-5.6 5.9 2.4-4.8-.5-10.1-1.3-12.3-2.7 4-6.9 8-6.9 16.1 0 6.8 4.5 11.9 5.9 11.9Z"/></svg></span>
+          <span class="footer-name">Stefan Ecliserescu</span>
         </div>
-        <p style="margin:18px 0 0;font-size:15px;line-height:1.6;color:#a99f93;">{{ t.footer.desc }}</p>
+        <p class="footer-desc">{{ t.footer.desc }}</p>
       </div>
-      <div style="display:flex;flex-wrap:wrap;gap:48px;">
+      <div class="footer-cols">
         <div>
-          <span style="font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:#7d736a;">{{ t.footer.explore }}</span>
-          <div style="display:flex;flex-direction:column;gap:10px;margin-top:16px;">
+          <span class="footer-col-title">{{ t.footer.explore }}</span>
+          <div class="footer-col-links">
             <sc-for list="{{ navLinks }}" as="link" hint-placeholder-count="5">
-              <a href="{{ link.href }}" style="font-size:15px;color:#cfc6ba;" style-hover="color:#ffce5a;">{{ link.label }}</a>
+              <a href="{{ link.href }}" class="footer-link">{{ link.label }}</a>
             </sc-for>
           </div>
         </div>
         <div>
-          <span style="font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:#7d736a;">{{ t.footer.connect }}</span>
-          <div style="display:flex;flex-direction:column;gap:10px;margin-top:16px;">
-            <a href="https://www.instagram.com/seperformancearts/" target="_blank" rel="noopener" style="font-size:15px;color:#cfc6ba;" style-hover="color:#ffce5a;">Instagram</a>
-            <a href="#contact" style="font-size:15px;color:#cfc6ba;" style-hover="color:#ffce5a;">{{ t.book }}</a>
-            <a href="mailto:contact@seperformancearts.com" style="font-size:15px;color:#cfc6ba;" style-hover="color:#ffce5a;">contact@seperformancearts.com</a>
+          <span class="footer-col-title">{{ t.footer.connect }}</span>
+          <div class="footer-col-links">
+            <a href="https://www.instagram.com/seperformancearts/" target="_blank" rel="noopener" class="footer-link">Instagram</a>
+            <a href="#contact" class="footer-link">{{ t.book }}</a>
+            <a href="mailto:contact@seperformancearts.com" class="footer-link">contact@seperformancearts.com</a>
           </div>
         </div>
       </div>
     </div>
-    <div style="margin-top:clamp(40px,6vw,64px);padding-top:28px;border-top:1px solid rgba(255,140,70,.1);display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;align-items:center;">
-      <span style="font-size:13px;color:#7d736a;">{{ t.footer.rights }}</span>
-      <span style="font-size:13px;color:#7d736a;">@seperformancearts</span>
+    <div class="footer-bottom">
+      <span class="footer-fine">{{ t.footer.rights }}</span>
+      <span class="footer-fine">@seperformancearts</span>
     </div>
   </div>
 </footer>
@@ -443,8 +370,7 @@ class Component extends DCLogic {
       { cls: 'ar-1x1',  src: 'gallery/1.jpg', video: false },
       { cls: 'ar-4x5',  src: 'gallery/2.jpg', video: false },
       { cls: 'ar-16x9', src: 'gallery/3.jpg', video: false },
-      { cls: 'ar-4x5',  src: 'gallery/4.jpg', video: false },
-      { cls: 'ar-4x5',  src: 'gallery/5.jpg', video: false }
+      { cls: 'ar-4x5',  src: 'gallery/4.jpg', video: false }
     ];
 
     // ---- Translations: Romanian (default) + English ----
@@ -484,8 +410,7 @@ class Component extends DCLogic {
             'Spectacol cu baloane uriașe în parc',
             'Înghițire de foc sub cerul nopții',
             'Scântei în timpul unui spectacol de foc',
-            'Spectacol de foc în duo pentru publicul de pe stradă',
-            'Număr cu baloane pe catalige, încântând publicul'
+            'Spectacol de foc în duo pentru publicul de pe stradă'
           ]
         },
         events: {
@@ -570,8 +495,7 @@ class Component extends DCLogic {
             'Giant bubble performance in the park',
             'Fire eating under the night sky',
             'Sparks flying during a fire show',
-            'Duo fire performance for a street crowd',
-            'Stilt bubble act delighting the crowd'
+            'Duo fire performance for a street crowd'
           ]
         },
         events: {
@@ -796,12 +720,7 @@ class Component extends DCLogic {
     // merge static gallery media with the localized alt-text labels
     const gallery = this.galleryMeta.map((m, i) => ({ ...m, label: t.gallery.labels[i] }));
 
-    // language-selector button styles (active = warm gradient pill)
-    const segBase = 'border:0;border-radius:100px;font-weight:600;letter-spacing:.04em;cursor:pointer;transition:background .25s,color .25s;';
-    const activeFill = 'background:linear-gradient(135deg,#ffce5a,#ff5a1f);color:#0b0908;';
-    const inactiveFill = 'background:transparent;color:#cfc6ba;';
-    const segSmall = segBase + 'padding:7px 13px;font-size:12px;';
-    const segBig   = segBase + 'padding:11px 22px;font-size:16px;';
+    // language-selector active state (styling lives in style.css under .seg / .seg.is-active)
     const isRo = lang === 'ro';
     const isEn = lang === 'en';
 
@@ -860,10 +779,9 @@ class Component extends DCLogic {
       isEn: isEn,
       setRo: () => this.setState({ lang: 'ro' }),
       setEn: () => this.setState({ lang: 'en' }),
-      roBtnStyle:  segSmall + (isRo ? activeFill : inactiveFill),
-      enBtnStyle:  segSmall + (isEn ? activeFill : inactiveFill),
-      roBtnStyleM: segBig   + (isRo ? activeFill : inactiveFill),
-      enBtnStyleM: segBig   + (isEn ? activeFill : inactiveFill),
+      // active-state class fragment for the language buttons (shared by nav + mobile menu)
+      roBtnActive: isRo ? 'is-active' : '',
+      enBtnActive: isEn ? 'is-active' : '',
 
       toggleMenu: () => this.setState(s => {
         const open = !s.menuOpen;
